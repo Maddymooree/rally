@@ -811,6 +811,12 @@
         <input type="text" id="f-dates" name="dates" placeholder="e.g. july 22–26" required>
       </div>
     </div>
+    <div class="field-row" id="otherFestivalRow" style="display:none;">
+      <div class="field full">
+        <label for="f-festival-other">which festival or trip?</label>
+        <input type="text" id="f-festival-other" name="festivalOther" placeholder="tell us where you're headed">
+      </div>
+    </div>
     <div class="field-row">
       <div class="field full">
         <label for="f-from">traveling from</label>
@@ -850,6 +856,17 @@
     });
   });
 
+  const festivalSelect = document.getElementById('f-festival');
+  const otherFestivalRow = document.getElementById('otherFestivalRow');
+  const otherFestivalInput = document.getElementById('f-festival-other');
+
+  festivalSelect.addEventListener('change', function () {
+    const isOther = festivalSelect.value === 'other';
+    otherFestivalRow.style.display = isOther ? 'grid' : 'none';
+    otherFestivalInput.required = isOther;
+    if (!isOther) otherFestivalInput.value = '';
+  });
+
   const form = document.getElementById('joinForm');
   const status = document.getElementById('formStatus');
 
@@ -862,10 +879,14 @@
       return;
     }
 
+    const festivalValue = festivalSelect.value;
+    const festivalOtherValue = otherFestivalInput.value;
+
     const data = {
       name: document.getElementById('f-name').value,
       instagram: document.getElementById('f-insta').value,
-      festival: document.getElementById('f-festival').value,
+      festival: festivalValue === 'other' ? festivalOtherValue : festivalValue,
+      festivalOther: festivalOtherValue,
       dates: document.getElementById('f-dates').value,
       from: document.getElementById('f-from').value,
       timestamp: new Date().toISOString()
@@ -884,6 +905,7 @@
         status.textContent = "you're on the list. we'll be in touch once your crew comes together.";
         status.className = 'form-status success';
         form.reset();
+        otherFestivalRow.style.display = 'none';
       })
       .catch(function () {
         status.textContent = 'something went wrong — try again in a bit.';
