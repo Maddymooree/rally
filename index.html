@@ -786,31 +786,30 @@
         <input type="text" id="f-name" name="name" required>
       </div>
       <div class="field">
-        <label for="f-insta">instagram handle</label>
-        <input type="text" id="f-insta" name="instagram" placeholder="@yourhandle" required>
-      </div>
-    </div>
-    <div class="field-row">
-      <div class="field full">
-        <label for="f-email">email</label>
-        <input type="email" id="f-email" name="email" placeholder="you@email.com" required>
-      </div>
-    </div>
-    <div class="field-row">
-      <div class="field">
         <label for="f-age">age</label>
         <input type="number" id="f-age" name="age" min="13" max="120" required>
       </div>
+    </div>
+    <div class="field-row">
       <div class="field">
         <label for="f-gender">gender</label>
         <select id="f-gender" name="gender" required>
           <option value="" disabled selected>choose one</option>
           <option>female</option>
           <option>male</option>
+          <option>prefer not to say</option>
         </select>
+      </div>
+      <div class="field">
+        <label for="f-insta">instagram handle</label>
+        <input type="text" id="f-insta" name="instagram" placeholder="@yourhandle" required>
       </div>
     </div>
     <div class="field-row">
+      <div class="field">
+        <label for="f-email">email</label>
+        <input type="email" id="f-email" name="email" placeholder="you@email.com" required>
+      </div>
       <div class="field">
         <label for="f-festival">festival</label>
         <select id="f-festival" name="festival" required>
@@ -826,10 +825,6 @@
           <option>other</option>
         </select>
       </div>
-      <div class="field">
-        <label for="f-dates">your dates</label>
-        <input type="text" id="f-dates" name="dates" placeholder="e.g. july 22–26" required>
-      </div>
     </div>
     <div class="field-row" id="otherFestivalRow" style="display:none;">
       <div class="field full">
@@ -838,7 +833,11 @@
       </div>
     </div>
     <div class="field-row">
-      <div class="field full">
+      <div class="field">
+        <label for="f-dates">your dates</label>
+        <input type="text" id="f-dates" name="dates" placeholder="e.g. july 22–26" required>
+      </div>
+      <div class="field">
         <label for="f-from">traveling from</label>
         <input type="text" id="f-from" name="from" placeholder="city, state/country">
       </div>
