@@ -836,8 +836,8 @@
         <input type="text" id="f-name" name="name" required>
       </div>
       <div class="field">
-        <label for="f-age">age</label>
-        <input type="number" id="f-age" name="age" min="13" max="120" required>
+        <label for="f-age">age (18+)</label>
+        <input type="number" id="f-age" name="age" min="18" max="120" required>
       </div>
     </div>
     <div class="field-row">
@@ -934,6 +934,16 @@
     if (!isOther) otherFestivalInput.value = '';
   });
 
+  const ageInput = document.getElementById('f-age');
+  ageInput.addEventListener('invalid', function () {
+    ageInput.setCustomValidity(
+      ageInput.validity.rangeUnderflow ? 'you must be 18 or older to apply to rally.' : ''
+    );
+  });
+  ageInput.addEventListener('input', function () {
+    ageInput.setCustomValidity('');
+  });
+
   const form = document.getElementById('joinForm');
   const status = document.getElementById('formStatus');
 
@@ -942,6 +952,13 @@
 
     if (SUBMIT_URL.indexOf('PASTE_YOUR') === 0) {
       status.textContent = "form isn't connected yet — add your Apps Script URL to go live.";
+      status.className = 'form-status error';
+      return;
+    }
+
+    const ageValue = parseInt(document.getElementById('f-age').value, 10);
+    if (isNaN(ageValue) || ageValue < 18) {
+      status.textContent = 'you must be 18 or older to apply to rally.';
       status.className = 'form-status error';
       return;
     }
