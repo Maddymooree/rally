@@ -501,8 +501,23 @@
     border-bottom: 1px solid rgba(255,255,255,0.4);
     padding-bottom: 3px;
   }
+  .festival-card.find-other {
+    background: var(--navy-soft);
+    border: 1px dashed rgba(255,255,255,0.3);
+  }
   @media (max-width: 900px) {
     .festival-grid { grid-template-columns: repeat(2, 1fr); }
+    .festival-card.find-other {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 28px;
+    }
+    .festival-card.find-other .fest-name { margin: 0; }
+    .festival-card.find-other .fest-dates { display: none; }
+    .festival-card.find-other .fest-cta { margin: 0; flex-shrink: 0; }
   }
   @media (max-width: 720px) {
     .festival-grid { grid-template-columns: 1fr; }
@@ -731,45 +746,50 @@
     <h2 class="bubble">find your crew</h2>
   </div>
   <div class="festival-grid">
-    <div class="festival-card">
+    <div class="festival-card" data-festival="coachella">
       <div class="fest-name bubble">coachella</div>
       <div class="fest-dates">weekend 1 & 2 · april</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="edc">
       <div class="fest-name bubble">edc</div>
       <div class="fest-dates">las vegas · may</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="ultra">
       <div class="fest-name bubble">ultra</div>
       <div class="fest-dates">miami · march</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="tomorrowland">
       <div class="fest-name bubble">tomorrowland</div>
       <div class="fest-dates">boom, belgium · july</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="lollapalooza">
       <div class="fest-name bubble">lollapalooza</div>
       <div class="fest-dates">chicago · august</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="burning man">
       <div class="fest-name bubble">burning man</div>
       <div class="fest-dates">black rock city · august</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="rolling loud">
       <div class="fest-name bubble">rolling loud</div>
       <div class="fest-dates">miami · july</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card">
+    <div class="festival-card" data-festival="austin city limits">
       <div class="fest-name bubble">austin city limits</div>
       <div class="fest-dates">austin · october</div>
       <div class="fest-cta">join the drop →</div>
+    </div>
+    <div class="festival-card find-other" data-festival="other">
+      <div class="fest-name bubble">can't find it?</div>
+      <div class="fest-dates">tell us where you're headed</div>
+      <div class="fest-cta">let us know →</div>
     </div>
   </div>
 </section>
@@ -865,12 +885,10 @@
     btn.style.cursor = 'pointer';
     btn.addEventListener('click', function () {
       const card = btn.closest('.festival-card');
-      const name = card.querySelector('.fest-name').textContent.trim();
+      const value = card.dataset.festival;
       const select = document.getElementById('f-festival');
-      const match = Array.from(select.options).find(function (o) {
-        return o.value.toLowerCase() === name.toLowerCase();
-      });
-      if (match) select.value = match.value;
+      select.value = value;
+      select.dispatchEvent(new Event('change'));
       document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
     });
   });
