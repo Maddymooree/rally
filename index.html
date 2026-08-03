@@ -244,6 +244,16 @@
     font-size: clamp(2rem, 4vw, 2.8rem);
     margin: 0;
   }
+  .section-head .section-sub {
+    font-family: 'Inter', sans-serif;
+    text-transform: none;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 14px auto 0;
+    line-height: 1.6;
+  }
   .steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -282,6 +292,19 @@
   @media (max-width: 820px) {
     .steps { grid-template-columns: 1fr; }
   }
+  .safety-note {
+    margin-top: 32px;
+    background: var(--white);
+    border: 1px solid rgba(13,27,62,0.08);
+    border-left: 4px solid var(--navy);
+    border-radius: 16px;
+    padding: 20px 24px;
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  .safety-note strong { color: var(--ink); }
 
   /* ---------- SOCIAL FEED PREVIEW ---------- */
   .feed-section {
@@ -628,7 +651,7 @@
 
 <nav>
   <div class="logo bubble">rally</div>
-  <a href="#join" class="nav-cta">join the waitlist</a>
+  <a href="#join" class="nav-cta">apply to rally</a>
 </nav>
 
 <section class="hero">
@@ -636,8 +659,8 @@
     <span class="eyebrow">not a dating app</span>
     <h1 class="bubble">you shouldn't have to<br><span class="accent">rally</span> alone.</h1>
     <p>rally matches you with people already going to the same festivals and trips as you, so you land with a crew instead of a group chat of strangers, or no one at all.</p>
-    <a href="#join" class="cta">get on the list</a>
-    <div class="hero-footnote">no swiping. no profiles to maintain. just people headed to the same place as you.</div>
+    <a href="#join" class="cta">apply to rally</a>
+    <div class="hero-footnote">no swiping. no profiles to maintain. every application is reviewed before you're matched.</div>
   </div>
 </section>
 
@@ -656,6 +679,7 @@
       <li>a way to fix being lonely</li>
       <li>a reason to ditch your friends</li>
       <li>another feed to scroll</li>
+      <li>open to just anyone</li>
     </ul>
   </div>
   <div class="is">
@@ -665,6 +689,7 @@
       <li>people headed to the same place</li>
       <li>a chat with people who show up</li>
       <li>never sitting a moment out</li>
+      <li>reviewed before you're matched</li>
     </ul>
   </div>
 </div>
@@ -677,19 +702,22 @@
   <div class="steps">
     <div class="step">
       <div class="num">1</div>
-      <h4 class="bubble">tell us where you're headed</h4>
-      <p>drop the festival or trip and your dates. one form, two minutes, no account to build out.</p>
+      <h4 class="bubble">apply to rally</h4>
+      <p>tell us where you're headed and a bit about yourself. one form, two minutes, no account to build out.</p>
     </div>
     <div class="step">
       <div class="num">2</div>
-      <h4 class="bubble">we find your overlap</h4>
-      <p>we look at everyone else headed to the same event on the same dates and group people who actually line up.</p>
+      <h4 class="bubble">we vet & find your overlap</h4>
+      <p>every application is reviewed by a real person, then matched with others headed to the same event on the same dates.</p>
     </div>
     <div class="step">
       <div class="num">3</div>
       <h4 class="bubble">get introduced, not matched</h4>
-      <p>we send a warm intro to a small group chat. no algorithm score, no swipe deck, just people to meet up with.</p>
+      <p>once you're approved, we send a warm intro to a small group chat. no algorithm score, no swipe deck, just people to meet up with.</p>
     </div>
+  </div>
+  <div class="safety-note">
+    <strong>your safety comes first.</strong> rally isn't an open signup — every application is personally reviewed before you're added to a group, so the people in your crew are who they say they are.
   </div>
 </section>
 
@@ -796,8 +824,9 @@
 
 <section class="join" id="join">
   <div class="section-head">
-    <span class="eyebrow-dark">get on the list</span>
+    <span class="eyebrow-dark">apply to rally</span>
     <h2 class="bubble">tell us where you're headed</h2>
+    <p class="section-sub">every application is reviewed by a real person before you're added to a group — this isn't an open signup, it's how we vet who gets rallied.</p>
   </div>
   <form class="join-form" id="joinForm">
     <div class="field-row">
@@ -862,14 +891,14 @@
         <input type="text" id="f-from" name="from" placeholder="city, state/country">
       </div>
     </div>
-    <button type="submit" class="cta submit-btn">get on the list</button>
+    <button type="submit" class="cta submit-btn">submit application</button>
     <div class="form-status" id="formStatus"></div>
   </form>
 </section>
 
 <section class="closing-banner">
   <h2 class="bubble">you don't have to <span class="accent">rally</span> alone.</h2>
-  <a href="#join" class="cta">get on the list</a>
+  <a href="#join" class="cta">apply to rally</a>
 </section>
 
 <footer>
@@ -942,7 +971,7 @@
       body: JSON.stringify(data)
     })
       .then(function () {
-        status.textContent = "you're on the list. we'll be in touch once your crew comes together.";
+        status.textContent = "your application is in — we'll review it and be in touch once your crew comes together.";
         status.className = 'form-status success';
         form.reset();
         otherFestivalRow.style.display = 'none';
