@@ -63,6 +63,22 @@
     padding: 10px 20px;
     border-radius: 999px;
   }
+  nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  nav .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+  }
+  nav .nav-link:hover {
+    color: var(--white);
+  }
+  @media (max-width: 480px) {
+    nav .nav-link { display: none; }
+  }
 
   /* ---------- HERO ---------- */
   .hero {
@@ -658,7 +674,10 @@
 
 <nav>
   <div class="logo bubble">rally</div>
-  <a href="#join" class="nav-cta">apply to rally</a>
+  <div class="nav-right">
+    <a href="safety.html" class="nav-link">safety</a>
+    <a href="#join" class="nav-cta">apply to rally</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -727,7 +746,7 @@
     </div>
   </div>
   <div class="safety-note">
-    <strong>your safety comes first.</strong> rally isn't an open signup — every application is personally reviewed before you're added to a group, so the people in your crew are who they say they are.
+    <strong>your safety comes first.</strong> rally isn't an open signup — every application is personally reviewed before you're added to a group, so the people in your crew are who they say they are. <a href="safety.html" style="text-decoration: underline; color: var(--navy); font-weight: 600;">read more about how we vet →</a>
   </div>
 </section>
 
@@ -914,6 +933,9 @@
 <footer>
   <span class="bubble">rally</span>
   you should rally · @youshouldrally
+  <div style="margin-top: 8px;">
+    <a href="safety.html" style="color: var(--muted); text-decoration: underline;">safety</a>
+  </div>
 </footer>
 
 <script>
