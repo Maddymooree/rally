@@ -63,6 +63,22 @@
     padding: 10px 20px;
     border-radius: 999px;
   }
+  nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  nav .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+  }
+  nav .nav-link:hover {
+    color: var(--white);
+  }
+  @media (max-width: 480px) {
+    nav .nav-link { display: none; }
+  }
 
   /* ---------- PAGE HEADER ---------- */
   .page-header {
@@ -252,7 +268,10 @@
 
 <nav>
   <a href="index.html" class="logo bubble">rally</a>
-  <a href="index.html#join" class="nav-cta">apply to rally</a>
+  <div class="nav-right">
+    <a href="festivals.html" class="nav-link">festivals</a>
+    <a href="index.html#join" class="nav-cta">apply to rally</a>
+  </div>
 </nav>
 
 <section class="page-header">
