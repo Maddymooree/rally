@@ -563,6 +563,28 @@
     background: var(--navy-soft);
     border: 1px dashed rgba(255,255,255,0.3);
   }
+  .featured-festival {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .featured-festival .festival-card {
+    padding: 44px 36px;
+  }
+  .featured-festival .fest-name {
+    font-size: 34px;
+  }
+  .browse-more {
+    text-align: center;
+    margin-top: 28px;
+  }
+  .browse-link {
+    display: inline-block;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--navy);
+    border-bottom: 1px solid rgba(13,27,62,0.3);
+    padding-bottom: 3px;
+  }
   @media (max-width: 900px) {
     .festival-grid { grid-template-columns: repeat(2, 1fr); }
     .festival-card.find-other {
@@ -815,53 +837,16 @@
     <span class="eyebrow-dark">active drops</span>
     <h2 class="bubble">find your crew</h2>
   </div>
-  <div class="festival-grid">
-    <div class="festival-card" data-festival="coachella">
-      <div class="fest-name bubble">coachella</div>
-      <div class="fest-dates">weekend 1 & 2 · april</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
-    <div class="festival-card" data-festival="edc">
-      <div class="fest-name bubble">edc</div>
-      <div class="fest-dates">las vegas · may</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
-    <div class="festival-card" data-festival="ultra">
-      <div class="fest-name bubble">ultra</div>
-      <div class="fest-dates">miami · march</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
-    <div class="festival-card" data-festival="tomorrowland">
-      <div class="fest-name bubble">tomorrowland</div>
-      <div class="fest-dates">boom, belgium · july</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
-    <div class="festival-card" data-festival="lollapalooza">
-      <div class="fest-name bubble">lollapalooza</div>
-      <div class="fest-dates">chicago · august</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
-    <div class="festival-card" data-festival="burning man">
-      <div class="fest-name bubble">burning man</div>
-      <div class="fest-dates">black rock city · august</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
-    <div class="festival-card" data-festival="rolling loud">
-      <div class="fest-name bubble">rolling loud</div>
-      <div class="fest-dates">miami · july</div>
-      <div class="fest-cta">join the drop →</div>
-    </div>
+  <div class="featured-festival">
     <div class="festival-card" data-festival="austin city limits">
       <span class="up-next-badge">up next</span>
       <div class="fest-name bubble">austin city limits</div>
       <div class="fest-dates">austin · october 2–4 & 9–11</div>
       <div class="fest-cta">join the drop →</div>
     </div>
-    <div class="festival-card find-other" data-festival="other">
-      <div class="fest-name bubble">can't find it?</div>
-      <div class="fest-dates">tell us where you're headed</div>
-      <div class="fest-cta">let us know →</div>
-    </div>
+  </div>
+  <div class="browse-more">
+    <a href="festivals.html" class="browse-link">browse other festivals →</a>
   </div>
 </section>
 
@@ -948,7 +933,7 @@
   <span class="bubble">rally</span>
   you should rally · @youshouldrally
   <div style="margin-top: 8px;">
-    <a href="safety.html" style="color: var(--muted); text-decoration: underline;">safety</a>
+    <a href="festivals.html" style="color: var(--muted); text-decoration: underline;">all festivals</a> · <a href="safety.html" style="color: var(--muted); text-decoration: underline;">safety</a>
   </div>
   <div style="margin-top: 8px;">
     run a festival? <a href="mailto:partnerships@youshouldrally.com" style="color: var(--muted); text-decoration: underline;">let's talk about partnering</a>
@@ -981,6 +966,17 @@
     otherFestivalInput.required = isOther;
     if (!isOther) otherFestivalInput.value = '';
   });
+
+  const festivalParam = new URLSearchParams(window.location.search).get('festival');
+  if (festivalParam) {
+    const paramMatch = Array.from(festivalSelect.options).find(function (o) {
+      return o.value.toLowerCase() === festivalParam.toLowerCase();
+    });
+    if (paramMatch) {
+      festivalSelect.value = paramMatch.value;
+      festivalSelect.dispatchEvent(new Event('change'));
+    }
+  }
 
   const ageInput = document.getElementById('f-age');
   ageInput.addEventListener('invalid', function () {

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rally — browse festivals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --navy-soft: #16264f;
+    --navy-light: #9fb4e8;
+    --navy-tint: #e7eaf3;
+    --cream: #eef1f8;
+    --white: #ffffff;
+    --ink: #0d1b3e;
+    --muted: #6b7394;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .bubble {
+    font-family: 'Baloo 2', sans-serif;
+    text-transform: lowercase;
+    font-weight: 700;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 6vw;
+    position: sticky;
+    top: 0;
+    background: var(--navy);
+    z-index: 50;
+  }
+  nav .logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+  nav .nav-cta {
+    background: var(--white);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 999px;
+  }
+  nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  nav .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+  }
+  nav .nav-link:hover {
+    color: var(--white);
+  }
+  @media (max-width: 480px) {
+    nav .nav-link { display: none; }
+  }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-header {
+    position: relative;
+    padding: 8vh 6vw 6vh;
+    background: var(--navy);
+    color: var(--white);
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.08), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255,255,255,0.06), transparent 45%);
+    pointer-events: none;
+  }
+  .page-header-inner {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .page-header h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .page-header p {
+    font-family: 'Inter', sans-serif;
+    text-transform: none;
+    font-weight: 400;
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ---------- SEARCH + GRID ---------- */
+  .festivals {
+    max-width: 1000px;
+    margin: 0 auto 120px;
+    padding: 80px 6vw 0;
+  }
+  .festival-search {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 44px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    padding: 14px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(13,27,62,0.15);
+    background: var(--white);
+    color: var(--ink);
+  }
+  .festival-search:focus {
+    outline: none;
+    border-color: var(--navy);
+  }
+  .festival-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .festival-card {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 24px;
+    padding: 30px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease;
+  }
+  .festival-card .up-next-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: var(--navy-light);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .festival-card:hover { transform: translateY(-4px); }
+  .festival-card .fest-name {
+    font-family: 'Baloo 2', sans-serif;
+    text-transform: lowercase;
+    font-size: 28px;
+    margin: 0 0 6px;
+  }
+  .festival-card .fest-dates {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 18px;
+  }
+  .festival-card .fest-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 3px;
+  }
+  .festival-card.find-other {
+    background: var(--navy-soft);
+    border: 1px dashed rgba(255,255,255,0.3);
+  }
+  .no-results {
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+    padding: 40px 0;
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .festival-grid { grid-template-columns: repeat(2, 1fr); }
+    .festival-card.find-other {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 28px;
+    }
+    .festival-card.find-other .fest-name { margin: 0; }
+    .festival-card.find-other .fest-dates { display: none; }
+    .festival-card.find-other .fest-cta { margin: 0; flex-shrink: 0; }
+  }
+  @media (max-width: 720px) {
+    .festival-grid { grid-template-columns: 1fr; }
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 6vw 60px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer .bubble { color: var(--navy); font-size: 16px; display: block; margin-bottom: 6px; }
+  footer a.footer-link {
+    color: var(--muted);
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo bubble">rally</a>
+  <div class="nav-right">
+    <a href="safety.html" class="nav-link">safety</a>
+    <a href="index.html#join" class="nav-cta">apply to rally</a>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="page-header-inner">
+    <span class="eyebrow">all festivals</span>
+    <h1 class="bubble">find your crew</h1>
+    <p>search or browse every festival and trip we're currently matching people for.</p>
+  </div>
+</section>
+
+<section class="festivals">
+  <input type="text" id="festivalSearch" class="festival-search" placeholder="search festivals...">
+  <div class="festival-grid" id="festivalGrid">
+    <div class="festival-card" data-festival="austin city limits">
+      <span class="up-next-badge">up next</span>
+      <div class="fest-name bubble">austin city limits</div>
+      <div class="fest-dates">austin · october 2–4 & 9–11</div>
+      <a href="index.html?festival=austin%20city%20limits#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="coachella">
+      <div class="fest-name bubble">coachella</div>
+      <div class="fest-dates">weekend 1 & 2 · april</div>
+      <a href="index.html?festival=coachella#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="edc">
+      <div class="fest-name bubble">edc</div>
+      <div class="fest-dates">las vegas · may</div>
+      <a href="index.html?festival=edc#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="ultra">
+      <div class="fest-name bubble">ultra</div>
+      <div class="fest-dates">miami · march</div>
+      <a href="index.html?festival=ultra#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="tomorrowland">
+      <div class="fest-name bubble">tomorrowland</div>
+      <div class="fest-dates">boom, belgium · july</div>
+      <a href="index.html?festival=tomorrowland#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="lollapalooza">
+      <div class="fest-name bubble">lollapalooza</div>
+      <div class="fest-dates">chicago · august</div>
+      <a href="index.html?festival=lollapalooza#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="burning man">
+      <div class="fest-name bubble">burning man</div>
+      <div class="fest-dates">black rock city · august</div>
+      <a href="index.html?festival=burning%20man#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card" data-festival="rolling loud">
+      <div class="fest-name bubble">rolling loud</div>
+      <div class="fest-dates">miami · july</div>
+      <a href="index.html?festival=rolling%20loud#join" class="fest-cta">join the drop →</a>
+    </div>
+    <div class="festival-card find-other" data-festival="other">
+      <div class="fest-name bubble">can't find it?</div>
+      <div class="fest-dates">tell us where you're headed</div>
+      <a href="index.html?festival=other#join" class="fest-cta">let us know →</a>
+    </div>
+  </div>
+  <div class="no-results" id="noResults">no festivals match that search — but you can still apply and tell us where you're headed.</div>
+</section>
+
+<footer>
+  <span class="bubble">rally</span>
+  you should rally · @youshouldrally
+  <div style="margin-top: 8px;">
+    <a href="index.html" class="footer-link">home</a> · <a href="safety.html" class="footer-link">safety</a>
+  </div>
+  <div style="margin-top: 8px;">
+    run a festival? <a href="mailto:partnerships@youshouldrally.com" class="footer-link">let's talk about partnering</a>
+  </div>
+</footer>
+
+<script>
+  const searchInput = document.getElementById('festivalSearch');
+  const grid = document.getElementById('festivalGrid');
+  const noResults = document.getElementById('noResults');
+  const allCards = Array.from(grid.querySelectorAll('.festival-card'));
+  const findOtherCard = grid.querySelector('.festival-card.find-other');
+
+  searchInput.addEventListener('input', function () {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    allCards.forEach(function (card) {
+      if (card === findOtherCard) return;
+      const name = card.querySelector('.fest-name').textContent.toLowerCase();
+      const matches = name.includes(query);
+      card.style.display = matches ? '' : 'none';
+      if (matches) visibleCount++;
+    });
+
+    noResults.style.display = (query && visibleCount === 0) ? 'block' : 'none';
+  });
+</script>
+
+</body>
+</html>
