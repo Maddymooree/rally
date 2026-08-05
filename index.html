@@ -200,6 +200,10 @@
   @media (max-width: 720px) {
     .hero-heading-wide { display: none; }
     .hero-heading-narrow { display: inline; }
+    .hero h1 { font-size: clamp(3.1rem, 12vw, 4.4rem); }
+  }
+  @media (max-width: 380px) {
+    .hero h1 { font-size: clamp(2.8rem, 11vw, 3.6rem); }
   }
   .hero p {
     font-family: 'Inter', sans-serif;
@@ -783,8 +787,8 @@
   <div class="nav-right">
     <a href="festivals.html" class="nav-link">festivals</a>
     <a href="safety.html" class="nav-link">safety</a>
-    <button class="nav-menu-btn" id="navMenuBtn" aria-label="menu">☰</button>
     <a href="#join" class="nav-cta">apply to rally</a>
+    <button class="nav-menu-btn" id="navMenuBtn" aria-label="menu">☰</button>
     <div class="nav-dropdown" id="navDropdown">
       <a href="festivals.html">festivals</a>
       <a href="safety.html">safety</a>
