@@ -80,6 +80,39 @@
     nav .nav-link { display: none; }
   }
 
+  /* ---------- ACL BANNER ---------- */
+  .acl-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    background: var(--navy-light);
+    color: var(--navy);
+    padding: 12px 6vw;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .acl-banner-text strong {
+    font-weight: 800;
+  }
+  .acl-banner-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  @media (max-width: 600px) {
+    .acl-banner { font-size: 13px; padding: 12px 5vw; }
+  }
+
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
@@ -716,6 +749,11 @@
   </div>
 </nav>
 
+<div class="acl-banner">
+  <span class="acl-banner-text">🎪 austin city limits is next — <strong id="aclWeeksOut">counting down</strong><span id="aclApplicantCount"></span></span>
+  <a href="#" id="aclBannerCta" class="acl-banner-cta">apply for ACL →</a>
+</div>
+
 <section class="hero">
   <div class="hero-inner">
     <span class="eyebrow">not a dating app</span>
@@ -955,6 +993,27 @@
       select.dispatchEvent(new Event('change'));
       document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
     });
+  });
+
+  // ACL countdown banner — update ACL_APPLICANT_COUNT as applications come in.
+  const ACL_DATE = new Date('2026-10-02T00:00:00');
+  const ACL_APPLICANT_COUNT = 0;
+
+  const msPerWeek = 1000 * 60 * 60 * 24 * 7;
+  const weeksOut = Math.max(1, Math.ceil((ACL_DATE - new Date()) / msPerWeek));
+  document.getElementById('aclWeeksOut').textContent = weeksOut + (weeksOut === 1 ? ' week out' : ' weeks out');
+
+  if (ACL_APPLICANT_COUNT > 0) {
+    document.getElementById('aclApplicantCount').textContent =
+      ' · ' + ACL_APPLICANT_COUNT + (ACL_APPLICANT_COUNT === 1 ? ' person already applied' : ' people already applied');
+  }
+
+  document.getElementById('aclBannerCta').addEventListener('click', function (e) {
+    e.preventDefault();
+    const select = document.getElementById('f-festival');
+    select.value = 'austin city limits';
+    select.dispatchEvent(new Event('change'));
+    document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
   });
 
   const festivalSelect = document.getElementById('f-festival');
