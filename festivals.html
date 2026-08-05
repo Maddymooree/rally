@@ -67,6 +67,7 @@
     display: flex;
     align-items: center;
     gap: 24px;
+    position: relative;
   }
   nav .nav-link {
     font-size: 14px;
@@ -76,8 +77,45 @@
   nav .nav-link:hover {
     color: var(--white);
   }
+  nav .nav-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 20px;
+    line-height: 1;
+    padding: 4px 2px;
+    cursor: pointer;
+  }
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    background: var(--navy-soft);
+    border-radius: 14px;
+    padding: 8px;
+    flex-direction: column;
+    min-width: 160px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.3);
+  }
+  .nav-dropdown.open {
+    display: flex;
+  }
+  .nav-dropdown a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+  }
+  .nav-dropdown a:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+  }
   @media (max-width: 480px) {
     nav .nav-link { display: none; }
+    nav .nav-menu-btn { display: inline-block; }
   }
 
   /* ---------- PAGE HEADER ---------- */
@@ -252,7 +290,12 @@
   <a href="index.html" class="logo bubble">rally</a>
   <div class="nav-right">
     <a href="safety.html" class="nav-link">safety</a>
+    <button class="nav-menu-btn" id="navMenuBtn" aria-label="menu">☰</button>
     <a href="index.html#join" class="nav-cta">apply to rally</a>
+    <div class="nav-dropdown" id="navDropdown">
+      <a href="safety.html">safety</a>
+      <a href="index.html">home</a>
+    </div>
   </div>
 </nav>
 
@@ -329,6 +372,18 @@
 </footer>
 
 <script>
+  const navMenuBtn = document.getElementById('navMenuBtn');
+  const navDropdown = document.getElementById('navDropdown');
+  navMenuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    navDropdown.classList.toggle('open');
+  });
+  document.addEventListener('click', function (e) {
+    if (!navDropdown.contains(e.target) && e.target !== navMenuBtn) {
+      navDropdown.classList.remove('open');
+    }
+  });
+
   const searchInput = document.getElementById('festivalSearch');
   const grid = document.getElementById('festivalGrid');
   const noResults = document.getElementById('noResults');
