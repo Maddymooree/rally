@@ -78,7 +78,54 @@ function FormingScreen({ runKey }: { runKey: number }) {
   );
 }
 
-function ChatScreen() {
+function TypingBubble() {
+  return (
+    <div className="flex justify-start">
+      <div className="flex items-center gap-1 px-3 py-2.5 rounded-xl anim-slide-up" style={{ background: "var(--secondary)" }}>
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className="w-1.5 h-1.5 rounded-full"
+            style={{
+              background: "var(--muted-foreground)",
+              animation: "typing-bounce 1.1s infinite ease-in-out",
+              animationDelay: `${i * 0.15}s`,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ChatScreen({ runKey }: { runKey: number }) {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [typing, setTyping] = useState(false);
+
+  useEffect(() => {
+    setVisibleCount(0);
+    setTyping(false);
+  }, [runKey]);
+
+  useEffect(() => {
+    if (visibleCount >= CHAT_MESSAGES.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisibleCount(CHAT_MESSAGES.length);
+      return;
+    }
+    const msg = CHAT_MESSAGES[visibleCount];
+    if (!msg.self) {
+      setTyping(true);
+      const t = setTimeout(() => {
+        setTyping(false);
+        setVisibleCount((c) => c + 1);
+      }, 750);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => setVisibleCount((c) => c + 1), 550);
+    return () => clearTimeout(t);
+  }, [visibleCount, runKey]);
+
   return (
     <div className="flex flex-col h-full px-4 pt-2 pb-4">
       <div className="flex items-center gap-2 mb-3 pb-2.5" style={{ borderBottom: "1px solid var(--border)" }}>
@@ -91,14 +138,15 @@ function ChatScreen() {
         <span className="ml-auto font-body text-[10px] font-semibold" style={{ color: "var(--primary)" }}>5 ppl</span>
       </div>
       <div className="flex-1 flex flex-col gap-1.5 overflow-hidden">
-        {CHAT_MESSAGES.map((msg, i) => (
-          <div key={i} className={`flex ${msg.self ? "justify-end" : "justify-start"}`}>
+        {CHAT_MESSAGES.slice(0, visibleCount).map((msg, i) => (
+          <div key={i} className={`flex anim-slide-up ${msg.self ? "justify-end" : "justify-start"}`}>
             <div className="px-2.5 py-1.5 rounded-xl font-body text-[11px] max-w-[78%] leading-snug" style={{ background: msg.self ? "var(--primary)" : "var(--secondary)", color: msg.self ? "var(--primary-foreground)" : "color-mix(in srgb,var(--foreground) 80%,transparent)" }}>
               {!msg.self && <p className="font-bold text-[9px] mb-0.5" style={{ color: "var(--primary)" }}>{msg.from}</p>}
               {msg.text}
             </div>
           </div>
         ))}
+        {typing && <TypingBubble />}
       </div>
     </div>
   );
@@ -107,15 +155,17 @@ function ChatScreen() {
 export function PhoneDemo() {
   const [screen, setScreen] = useState<DemoScreen>("search");
   const [fKey, setFKey] = useState(0);
+  const [cKey, setCKey] = useState(0);
   const order: DemoScreen[] = ["search", "forming", "chat"];
   const idx = order.indexOf(screen);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const delay = screen === "forming" ? 4200 : 3000;
+    const delay = screen === "forming" ? 4200 : screen === "chat" ? 6200 : 3000;
     const t = setTimeout(() => {
       const next = order[(idx + 1) % order.length];
       if (next === "forming") setFKey((k) => k + 1);
+      if (next === "chat") setCKey((k) => k + 1);
       setScreen(next);
     }, delay);
     return () => clearTimeout(t);
@@ -144,11 +194,11 @@ export function PhoneDemo() {
                 <div className="flex-1 min-h-0">
                   {screen === "search" && <SearchScreen />}
                   {screen === "forming" && <FormingScreen runKey={fKey} />}
-                  {screen === "chat" && <ChatScreen />}
+                  {screen === "chat" && <ChatScreen runKey={cKey} />}
                 </div>
                 <div className="flex justify-center pb-3 pt-2 gap-1.5 shrink-0">
                   {order.map((s) => (
-                    <button key={s} onClick={() => { if (s === "forming") setFKey((k) => k + 1); setScreen(s); }} className="rounded-full transition-all duration-200" style={{ width: screen === s ? "18px" : "6px", height: "6px", background: screen === s ? "var(--primary)" : "color-mix(in srgb,var(--foreground) 18%,transparent)" }} />
+                    <button key={s} onClick={() => { if (s === "forming") setFKey((k) => k + 1); if (s === "chat") setCKey((k) => k + 1); setScreen(s); }} className="rounded-full transition-all duration-200" style={{ width: screen === s ? "18px" : "6px", height: "6px", background: screen === s ? "var(--primary)" : "color-mix(in srgb,var(--foreground) 18%,transparent)" }} />
                   ))}
                 </div>
               </div>
@@ -156,7 +206,7 @@ export function PhoneDemo() {
           </div>
           <div className="flex-1 w-full space-y-3">
             {order.map((s) => (
-              <button key={s} onClick={() => { if (s === "forming") setFKey((k) => k + 1); setScreen(s); }} className="w-full text-left p-5 rounded-xl transition-all duration-200" style={{ background: screen === s ? "color-mix(in srgb, var(--primary) 7%, transparent)" : "var(--card)", border: `1px solid ${screen === s ? "color-mix(in srgb, var(--primary) 28%, transparent)" : "var(--border)"}` }}>
+              <button key={s} onClick={() => { if (s === "forming") setFKey((k) => k + 1); if (s === "chat") setCKey((k) => k + 1); setScreen(s); }} className="w-full text-left p-5 rounded-xl transition-all duration-200" style={{ background: screen === s ? "color-mix(in srgb, var(--primary) 7%, transparent)" : "var(--card)", border: `1px solid ${screen === s ? "color-mix(in srgb, var(--primary) 28%, transparent)" : "var(--border)"}` }}>
                 <p className="font-body text-[10px] font-bold tracking-[0.18em] uppercase mb-1.5" style={{ color: screen === s ? "var(--primary)" : "color-mix(in srgb,var(--foreground) 22%,transparent)" }}>
                   {steps[s].num} · {steps[s].label}
                 </p>
