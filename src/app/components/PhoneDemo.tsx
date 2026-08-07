@@ -221,7 +221,7 @@ export function PhoneDemo() {
   };
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 md:px-12" style={{ background: "var(--background)" }}>
+    <section ref={sectionRef} className="pt-12 pb-24 px-6 md:px-12" style={{ background: "var(--background)" }}>
       <div className="max-w-5xl mx-auto">
         <p className="font-body text-[11px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: "var(--primary)" }}>see it in action</p>
         <h2 className="font-display font-black text-white mb-16" style={{ fontSize: "clamp(2rem,5vw,3.2rem)" }}>three steps. one crew.</h2>

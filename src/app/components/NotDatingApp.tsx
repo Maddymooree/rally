@@ -16,7 +16,7 @@ const NOT = [
 
 export function NotDatingApp() {
   return (
-    <section className="py-24 px-6 md:px-12" style={{ background: "var(--background)" }}>
+    <section className="pt-24 pb-12 px-6 md:px-12" style={{ background: "var(--background)" }}>
       <div className="max-w-5xl mx-auto">
         <p className="font-body text-[11px] font-bold tracking-[0.18em] uppercase mb-12" style={{ color: "var(--primary)" }}>
           let's be clear
