@@ -235,7 +235,7 @@ export function PhoneDemo() {
                   <span className="font-body text-[10px]" style={{ color: "var(--muted-foreground)" }}>●●●</span>
                 </div>
                 <div className="flex-1 min-h-0">
-                  {screen === "search" && <SearchScreen />}
+                  {screen === "search" && inView && <SearchScreen />}
                   {screen === "forming" && <FormingScreen runKey={fKey} />}
                   {screen === "chat" && <ChatScreen runKey={cKey} />}
                 </div>
