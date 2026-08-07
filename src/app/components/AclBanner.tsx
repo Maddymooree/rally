@@ -21,29 +21,30 @@ export function AclBanner() {
   }, []);
 
   return (
-    <button
-      onClick={() => navigate("/?festival=austin%20city%20limits#apply")}
-      className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-4 py-2.5 sm:py-2 rounded-2xl sm:rounded-full mb-8 transition-all hover:opacity-90 active:scale-95 cursor-pointer text-center"
-      style={{
-        border: "1px solid color-mix(in srgb, var(--primary) 35%, transparent)",
-        background: "color-mix(in srgb, var(--primary) 8%, transparent)",
-      }}
+    <div
+      className="w-full"
+      style={{ background: "color-mix(in srgb, var(--primary) 6%, transparent)", borderBottom: "1px solid var(--border)" }}
     >
-      <span className="flex items-center gap-2">
-        <Mascot size={16} color="var(--primary)" />
-        <span className="font-body text-xs font-semibold" style={{ color: "var(--foreground)" }}>
-          austin city limits is next — {label || "counting down"}
-          {ACL_APPLICANT_COUNT > 0 && (
-            <span style={{ color: "var(--muted-foreground)" }}>
-              {" "}
-              · {ACL_APPLICANT_COUNT} {ACL_APPLICANT_COUNT === 1 ? "person" : "people"} already applied
-            </span>
-          )}
+      <button
+        onClick={() => navigate("/?festival=austin%20city%20limits#apply")}
+        className="w-full flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-6 py-3 text-center cursor-pointer transition-colors hover:bg-white/[0.02]"
+      >
+        <span className="flex items-center gap-2">
+          <Mascot size={15} color="var(--primary)" />
+          <span className="font-body text-xs font-semibold" style={{ color: "var(--foreground)" }}>
+            austin city limits is next — {label || "counting down"}
+            {ACL_APPLICANT_COUNT > 0 && (
+              <span style={{ color: "var(--muted-foreground)" }}>
+                {" "}
+                · {ACL_APPLICANT_COUNT} {ACL_APPLICANT_COUNT === 1 ? "person" : "people"} already applied
+              </span>
+            )}
+          </span>
         </span>
-      </span>
-      <span className="font-body text-xs font-bold" style={{ color: "var(--primary)" }}>
-        apply for ACL →
-      </span>
-    </button>
+        <span className="font-body text-xs font-bold" style={{ color: "var(--primary)" }}>
+          apply for ACL →
+        </span>
+      </button>
+    </div>
   );
 }

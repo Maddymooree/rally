@@ -4,7 +4,6 @@ import rally2 from "@/imports/rally2.jpg";
 import rally3 from "@/imports/rally3.jpg";
 import rally4 from "@/imports/rally4.jpg";
 import rally7 from "@/imports/rally7.jpg";
-import { AclBanner } from "./AclBanner";
 
 const PHOTOS = [rally1, rally2, rally3, rally4, rally7, rally1];
 
@@ -67,7 +66,7 @@ export function Hero() {
           just people headed to the same place as you.
         </p>
 
-        <div className="flex flex-col items-center gap-4 mb-2">
+        <div className="flex flex-col items-center gap-4">
           <a
             href="#apply"
             className="font-body flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all hover:opacity-90 active:scale-95"
@@ -76,8 +75,6 @@ export function Hero() {
             find my crew <ArrowRight size={16} />
           </a>
         </div>
-
-        <AclBanner />
       </div>
     </section>
   );
