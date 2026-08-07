@@ -26,6 +26,9 @@ export function Hero() {
         <div className="collage-frame f5">
           <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[4]})` }} />
         </div>
+        <div className="collage-frame f6">
+          <div className="frame-inner" style={{ backgroundImage: `url(${rally2})` }} />
+        </div>
       </div>
 
       <div

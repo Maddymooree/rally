@@ -118,13 +118,14 @@ export function GlobalStyles() {
       .f3 { top: 4%; right: -3%; width: clamp(185px,20vw,252px); height: clamp(255px,28vw,348px); transform: rotate(5deg); z-index: 3; background: var(--secondary); }
       .f4 { bottom: -5%; left: 0%; width: clamp(225px,27vw,322px); height: clamp(150px,18vw,222px); transform: rotate(-4deg); z-index: 3; background: var(--card); }
       .f5 { bottom: -2%; right: 25%; width: clamp(190px,24vw,272px); height: clamp(132px,16vw,200px); transform: rotate(3.2deg); z-index: 2; background: var(--secondary); }
+      .f6 { bottom: -7%; right: -3%; width: clamp(180px,20vw,248px); height: clamp(248px,28vw,338px); transform: rotate(-3.2deg); z-index: 3; background: var(--card); }
 
       @media (max-width: 767px) {
-        .f2 { display: none; }
+        .f2, .f5 { display: none; }
         .f1 { width:44vw; height:59vw; top:2%; left:-8%; }
         .f3 { width:40vw; height:55vw; top:2%; right:-6%; }
         .f4 { width:52vw; height:37vw; bottom:-1%; left:-5%; }
-        .f5 { width:42vw; height:58vw; bottom:-4%; right:-6%; }
+        .f6 { width:42vw; height:58vw; bottom:-4%; right:-6%; }
       }
 
       /* ── nav mobile dropdown ── */
