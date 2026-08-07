@@ -63,8 +63,7 @@ export function ApplyForm() {
       .then(() => {
         setStatus({
           kind: "success",
-          message:
-            "your application is in — we'll review it and be in touch once your crew comes together. one last thing: follow @youshouldrally and send us a quick hi on instagram so we can add you to your crew's group chat when it's ready.",
+          message: "you're in the queue. follow @youshouldrally and DM us — that's how you get added to your crew's chat.",
         });
         setForm({ name: "", age: "", gender: "", instagram: "", email: "", festival: "", festivalOther: "", dates: "", from: "" });
       })
@@ -74,7 +73,7 @@ export function ApplyForm() {
   };
 
   return (
-    <section id="apply" className="py-24 px-6 md:px-12 scroll-mt-20" style={{ background: "var(--card)", borderTop: "1px solid var(--border)" }}>
+    <section id="apply" className="pt-10 pb-24 px-6 md:px-12 scroll-mt-[72px]" style={{ background: "var(--card)", borderTop: "1px solid var(--border)" }}>
       <div className="max-w-lg mx-auto">
         <p className="font-body text-[11px] font-bold tracking-[0.18em] uppercase mb-4 text-center" style={{ color: "var(--primary)" }}>
           apply now
