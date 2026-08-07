@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type DemoScreen = "search" | "forming" | "chat";
 
@@ -183,10 +183,26 @@ export function PhoneDemo() {
   const [screen, setScreen] = useState<DemoScreen>("search");
   const [fKey, setFKey] = useState(0);
   const [cKey, setCKey] = useState(0);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const order: DemoScreen[] = ["search", "forming", "chat"];
   const idx = order.indexOf(screen);
 
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const delay = screen === "forming" ? 4200 : screen === "chat" ? 6200 : 3000;
     const t = setTimeout(() => {
@@ -196,7 +212,7 @@ export function PhoneDemo() {
       setScreen(next);
     }, delay);
     return () => clearTimeout(t);
-  }, [screen]);
+  }, [screen, inView]);
 
   const steps: Record<DemoScreen, { num: string; label: string; body: string }> = {
     search: { num: "01", label: "pick your festival", body: "you pick where you're going. we take it from there." },
@@ -205,8 +221,11 @@ export function PhoneDemo() {
   };
 
   return (
-    <section className="py-24 px-6 md:px-12" style={{ background: "var(--background)" }}>
+    <section ref={sectionRef} className="py-24 px-6 md:px-12" style={{ background: "var(--background)" }}>
       <div className="max-w-5xl mx-auto">
+        <p className="font-body text-sm font-semibold mb-3" style={{ color: "color-mix(in srgb, var(--foreground) 55%, transparent)" }}>
+          apply <span style={{ color: "var(--primary)" }}>→</span> get vetted <span style={{ color: "var(--primary)" }}>→</span> matched with your crew
+        </p>
         <p className="font-body text-[11px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: "var(--primary)" }}>see it in action</p>
         <h2 className="font-display font-black text-white mb-16" style={{ fontSize: "clamp(2rem,5vw,3.2rem)" }}>three steps. one crew.</h2>
         <div className="flex flex-col lg:flex-row gap-12 items-center">
