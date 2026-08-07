@@ -10,20 +10,22 @@ const PHOTOS = [rally1, rally2, rally3, rally4, rally7];
 export function Hero() {
   return (
     <section className="relative overflow-hidden" style={{ minHeight: "100vh", background: "var(--background)" }}>
-      <div className="collage-frame f1">
-        <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[0]})` }} />
-      </div>
-      <div className="collage-frame f2">
-        <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[1]})` }} />
-      </div>
-      <div className="collage-frame f3">
-        <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[2]})` }} />
-      </div>
-      <div className="collage-frame f4">
-        <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[3]})` }} />
-      </div>
-      <div className="collage-frame f5">
-        <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[4]})` }} />
+      <div className="absolute inset-0 mx-auto" style={{ maxWidth: "1300px" }}>
+        <div className="collage-frame f1">
+          <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[0]})` }} />
+        </div>
+        <div className="collage-frame f2">
+          <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[1]})` }} />
+        </div>
+        <div className="collage-frame f3">
+          <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[2]})` }} />
+        </div>
+        <div className="collage-frame f4">
+          <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[3]})` }} />
+        </div>
+        <div className="collage-frame f5">
+          <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[4]})` }} />
+        </div>
       </div>
 
       <div
