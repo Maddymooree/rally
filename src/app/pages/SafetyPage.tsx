@@ -55,11 +55,14 @@ export function SafetyPage() {
 
           <p className="font-body text-sm text-center mt-10" style={{ color: "var(--muted-foreground)" }}>
             before you meet up: pick a public spot the first time, tell a friend your plans, and trust your gut.
-            {" "}
-            <a href="mailto:support@youshouldrally.com" className="font-semibold underline" style={{ color: "var(--foreground)" }}>
-              something feel off? tell us.
-            </a>
           </p>
+          <a
+            href="mailto:support@youshouldrally.com"
+            className="font-body text-sm font-semibold underline block text-center mt-2"
+            style={{ color: "var(--foreground)" }}
+          >
+            something feel off? tell us.
+          </a>
         </div>
       </section>
 
