@@ -11,7 +11,7 @@ const CREW_AVATARS = [
 ];
 
 const CHAT_MESSAGES = [
-  { from: "JK", text: "who's driving from austin?", self: false },
+  { from: "JK", text: "who driving to austin?", self: false },
   { from: "MP", text: "me!! room for 2 more", self: false },
   { from: "SA", text: "wait this crew is actually sick", self: false },
   { from: "EL", text: "lol rally always delivers", self: false },
@@ -19,6 +19,14 @@ const CHAT_MESSAGES = [
 ];
 
 function SearchScreen() {
+  const [tapped, setTapped] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setTimeout(() => setTapped(true), 1900);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="flex flex-col h-full px-4 pt-2 pb-4">
       <p className="font-display font-black text-sm tracking-wide mb-3" style={{ color: "var(--primary)" }}>rally</p>
@@ -34,7 +42,26 @@ function SearchScreen() {
           <span className="font-body text-[11px] font-bold px-1.5 py-0.5 rounded-full" style={{ background: "color-mix(in srgb, var(--primary) 18%, transparent)", color: "var(--primary)" }}>open</span>
         </div>
         <p className="font-body text-xs" style={{ color: "var(--muted-foreground)" }}>oct 2–4 & 9–11 · austin, tx</p>
-        <button className="font-body mt-3 w-full py-1.5 rounded-lg text-xs font-bold" style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}>join →</button>
+        <div className="relative mt-3">
+          <button
+            className="font-body w-full py-1.5 rounded-lg text-xs font-bold relative"
+            style={{
+              background: "var(--primary)",
+              color: "var(--primary-foreground)",
+              transform: tapped ? "scale(0.93)" : "scale(1)",
+              filter: tapped ? "brightness(1.12)" : "none",
+              transition: "transform 0.16s ease, filter 0.16s ease",
+            }}
+          >
+            join →
+          </button>
+          {tapped && (
+            <span
+              className="absolute inset-0 rounded-lg pointer-events-none"
+              style={{ border: "1.5px solid var(--primary)", animation: "tap-ripple 0.55s ease-out" }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -46,7 +73,7 @@ function FormingScreen({ runKey }: { runKey: number }) {
   useEffect(() => { setCount(0); setDone(false); }, [runKey]);
   useEffect(() => {
     if (count >= CREW_AVATARS.length) { const t = setTimeout(() => setDone(true), 300); return () => clearTimeout(t); }
-    const t = setTimeout(() => setCount((c) => c + 1), 620);
+    const t = setTimeout(() => setCount((c) => c + 1), 420);
     return () => clearTimeout(t);
   }, [count, runKey]);
   return (

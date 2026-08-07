@@ -58,6 +58,10 @@ export function GlobalStyles() {
         0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
         30% { transform: translateY(-3px); opacity: 1; }
       }
+      @keyframes tap-ripple {
+        0%   { transform: scale(1);    opacity: 0.9; }
+        100% { transform: scale(1.15); opacity: 0; }
+      }
 
       .ticker-track  { animation: ticker 32s linear infinite; display:flex; }
       .anim-pop-in   { animation: pop-in   .42s cubic-bezier(.34,1.56,.64,1) both; }
