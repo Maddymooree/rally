@@ -5,7 +5,7 @@ import rally3 from "@/imports/rally3.jpg";
 import rally4 from "@/imports/rally4.jpg";
 import rally7 from "@/imports/rally7.jpg";
 
-const PHOTOS = [rally1, rally2, rally3, rally4, rally7, rally1];
+const PHOTOS = [rally1, rally2, rally3, rally4, rally7];
 
 export function Hero() {
   return (
@@ -24,9 +24,6 @@ export function Hero() {
       </div>
       <div className="collage-frame f5">
         <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[4]})` }} />
-      </div>
-      <div className="collage-frame f6">
-        <div className="frame-inner" style={{ backgroundImage: `url(${PHOTOS[5]})` }} />
       </div>
 
       <div
