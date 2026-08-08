@@ -26,8 +26,7 @@ export const FESTIVALS: Festival[] = [
   {
     slug: "coachella",
     name: "coachella",
-    sub: "weekend 1",
-    dates: "apr 9–11, 2027",
+    dates: "apr 9–11 & 16–18, 2027",
     city: "indio, ca",
     status: null,
     icon: ({ size = 26 }) => (
@@ -40,8 +39,7 @@ export const FESTIVALS: Festival[] = [
   {
     slug: "edc",
     name: "edc",
-    sub: "dusk",
-    dates: "may 14–16, 2027",
+    dates: "may 14–16 & 21–23, 2027",
     city: "las vegas, nv",
     status: null,
     icon: ({ size = 26 }) => (
@@ -66,7 +64,7 @@ export const FESTIVALS: Festival[] = [
   {
     slug: "ultra",
     name: "ultra",
-    dates: "march",
+    dates: "mar 26–28, 2027",
     city: "miami, fl",
     status: null,
     icon: ({ size = 26 }) => (

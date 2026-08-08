@@ -34,7 +34,7 @@ export function FeaturedFestival() {
             className="font-body block w-full py-3 rounded-lg text-sm font-bold text-center transition-all hover:opacity-90"
             style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
           >
-            join the drop →
+            apply now →
           </Link>
         </div>
         <Link to="/festivals" className="font-body inline-block mt-8 text-sm font-semibold" style={{ color: "color-mix(in srgb, var(--foreground) 55%, transparent)" }}>

@@ -79,7 +79,7 @@ export function FestivalsPage() {
                   className="font-body text-sm font-semibold inline-flex items-center gap-1.5"
                   style={{ color: "var(--foreground)", borderBottom: "1px solid color-mix(in srgb, var(--foreground) 30%, transparent)", paddingBottom: "2px" }}
                 >
-                  join the drop →
+                  {fest.status === "open" ? "apply now →" : "coming soon"}
                 </Link>
               </div>
             ))}
