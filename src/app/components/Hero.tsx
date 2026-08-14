@@ -44,9 +44,9 @@ export function Hero() {
         style={{ height: "220px", zIndex: 4, background: "linear-gradient(to top,color-mix(in srgb, var(--background) 95%, transparent) 0%,transparent 100%)" }}
       />
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-24" style={{ zIndex: 10 }}>
+      <div className="hero-content absolute inset-0 flex flex-col items-center justify-center px-6 pt-24" style={{ zIndex: 10 }}>
         <div
-          className="flex items-center gap-2 px-4 py-2 rounded-full mb-7"
+          className="hero-pill flex items-center gap-2 px-4 py-2 rounded-full mb-7"
           style={{ border: "1px solid color-mix(in srgb, var(--primary) 40%, transparent)", background: "color-mix(in srgb, var(--primary) 7%, transparent)" }}
         >
           <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "var(--primary)" }} />
@@ -56,13 +56,13 @@ export function Hero() {
         </div>
 
         <h1
-          className="font-display text-center text-white mb-6"
+          className="hero-heading font-display text-center text-white mb-6"
           style={{ fontSize: "clamp(2.6rem,7.5vw,6rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.02em", maxWidth: "720px" }}
         >
           you shouldn't have to <span style={{ color: "var(--primary)" }}>rally</span> alone.
         </h1>
 
-        <p className="font-body text-center mb-10 max-w-sm" style={{ color: "color-mix(in srgb, var(--foreground) 50%, transparent)", fontSize: "1rem", lineHeight: 1.65 }}>
+        <p className="hero-subtext font-body text-center mb-10 max-w-sm" style={{ color: "color-mix(in srgb, var(--foreground) 50%, transparent)", fontSize: "1rem", lineHeight: 1.65 }}>
           no swiping. no profiles to maintain.
           <br />
           just connecting with people headed to the same festivals as you.
@@ -71,7 +71,7 @@ export function Hero() {
         <div className="flex flex-col items-center gap-4">
           <a
             href="#apply"
-            className="font-body flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all hover:opacity-90 active:scale-95"
+            className="hero-cta font-body flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all hover:opacity-90 active:scale-95"
             style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
           >
             find my crew <ArrowRight size={16} />

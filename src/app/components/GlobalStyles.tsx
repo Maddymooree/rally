@@ -128,6 +128,15 @@ export function GlobalStyles() {
         .f6 { width:42vw; height:58vw; bottom:-4%; right:-6%; }
       }
 
+      /* ── hero: short viewports (mobile landscape) ── */
+      @media (max-height: 560px) {
+        .hero-content { padding-top: 64px; }
+        .hero-pill { margin-bottom: 8px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
+        .hero-heading { font-size: clamp(1.6rem, 5.5vw, 2.4rem) !important; line-height: 1.15 !important; margin-bottom: 8px !important; }
+        .hero-subtext { display: none; }
+        .hero-cta { padding-top: 10px !important; padding-bottom: 10px !important; font-size: 14px !important; }
+      }
+
       /* ── nav mobile dropdown ── */
       .nav-menu-btn { display: none; }
       .nav-dropdown { display: none; }
