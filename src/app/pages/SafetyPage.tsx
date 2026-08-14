@@ -5,12 +5,12 @@ const ITEMS = [
   {
     icon: Shield,
     title: "vetted, not open signup",
-    body: "every application is reviewed by a real person — name, age, instagram, and trip details all get checked.",
+    body: "every application is reviewed by a real person — name, age, instagram, and trip details are all reviewed before you're approved.",
   },
   {
     icon: UserCheck,
     title: "18 and up only",
-    body: "checked at application, checked again before you're approved.",
+    body: "every rally member must be 18+ before joining a crew.",
   },
   {
     icon: Users,
@@ -20,7 +20,7 @@ const ITEMS = [
   {
     icon: Flag,
     title: "report & remove",
-    body: "one tap. no explanation required. someone's out fast.",
+    body: "one tap. no awkward confrontation. we'll take it from there.",
   },
 ];
 

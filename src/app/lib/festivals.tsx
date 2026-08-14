@@ -77,7 +77,7 @@ export const FESTIVALS: Festival[] = [
   {
     slug: "rolling loud",
     name: "rolling loud",
-    dates: "july",
+    dates: "dates tba",
     city: "miami, fl",
     status: null,
     icon: ({ size = 26 }) => (
@@ -92,7 +92,7 @@ export const FESTIVALS: Festival[] = [
   {
     slug: "lollapalooza",
     name: "lollapalooza",
-    dates: "august",
+    dates: "dates tba",
     city: "chicago, il",
     status: null,
     icon: ({ size = 26 }) => (
@@ -104,7 +104,7 @@ export const FESTIVALS: Festival[] = [
   {
     slug: "burning man",
     name: "burning man",
-    dates: "august",
+    dates: "dates tba",
     city: "black rock city, nv",
     status: null,
     icon: ({ size = 26 }) => (

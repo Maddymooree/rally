@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 import { Mascot } from "./Mascot";
 
 const IS = [
-  "your crew forms around vibe, experience, and logistics",
+  "grouped by vibe, experience, and logistics",
   "group-first: you meet everyone at once",
   "vetted applicants. real intros. actual plans.",
   "people headed to the same place",

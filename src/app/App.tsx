@@ -10,14 +10,37 @@ import { SafetyPage } from "./pages/SafetyPage";
 function ScrollToHash() {
   const location = useLocation();
   useEffect(() => {
-    if (location.hash) {
-      const el = document.querySelector(location.hash);
-      if (el) {
-        requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
-        return;
-      }
+    if (!location.hash) {
+      window.scrollTo({ top: 0 });
+      return;
     }
-    window.scrollTo({ top: 0 });
+
+    const id = location.hash.slice(1);
+    let cancelled = false;
+
+    // Give the route change a moment to mount/lay out before scrolling.
+    const attempt = setTimeout(() => {
+      if (cancelled) return;
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+
+    // Some mobile browsers silently drop a smooth scroll if page content
+    // (e.g. images) shifts layout mid-animation. Verify we actually landed
+    // and snap into place if not.
+    const verify = setTimeout(() => {
+      if (cancelled) return;
+      const el = document.getElementById(id);
+      if (el && Math.abs(el.getBoundingClientRect().top) > 40) {
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }, 700);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(attempt);
+      clearTimeout(verify);
+    };
   }, [location.pathname, location.hash]);
   return null;
 }
