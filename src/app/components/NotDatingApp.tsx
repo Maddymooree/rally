@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 import { Mascot } from "./Mascot";
 
 const IS = [
-  "a crew for your festival — not a match",
+  "your crew forms around vibe, experience, and logistics",
   "group-first: you meet everyone at once",
   "vetted applicants. real intros. actual plans.",
   "people headed to the same place",
@@ -10,8 +10,8 @@ const IS = [
 const NOT = [
   "a dating app",
   "a random group chat you never show up to",
-  "for finding a +1 to hold hands with",
-  "for people who are scared of crowds",
+  "awkward one-on-one matching",
+  "waiting for your friends to commit",
 ];
 
 export function NotDatingApp() {

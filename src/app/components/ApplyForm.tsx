@@ -81,8 +81,11 @@ export function ApplyForm() {
         <h2 className="font-display font-black text-white mb-3 text-center" style={{ fontSize: "clamp(2.2rem,6vw,3.6rem)" }}>
           ready to rally?
         </h2>
+        <p className="font-body text-base font-bold text-center mb-2" style={{ color: "var(--foreground)" }}>
+          we keep it curated so every crew is the real deal.
+        </p>
         <p className="font-body text-sm text-center mb-10" style={{ color: "var(--muted-foreground)" }}>
-          every application is reviewed by a real person before you're added to a group.
+          applications are reviewed before you're placed in a crew. real people, real plans — everyone in your crew applied to be there too.
         </p>
 
         {status.kind === "success" ? (
@@ -172,7 +175,7 @@ export function ApplyForm() {
               </p>
             )}
             <p className="font-body text-xs text-center pt-1" style={{ color: "color-mix(in srgb,var(--foreground) 22%,transparent)" }}>
-              never miss an experience because you had nobody to go with.
+              crews are curated. applications are reviewed.
             </p>
           </form>
         )}
