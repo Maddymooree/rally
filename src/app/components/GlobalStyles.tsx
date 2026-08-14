@@ -114,7 +114,7 @@ export function GlobalStyles() {
 
       /* ── frame positions: desktop ── */
       .f1 { top: 4%; left: -4%; width: clamp(165px,22vw,278px); height: clamp(225px,30vw,378px); transform: rotate(-5deg); z-index: 3; background: var(--secondary); }
-      .f2 { top: 3%; left: 24%; width: clamp(220px,26vw,308px); height: clamp(155px,17vw,218px); transform: rotate(3.5deg); z-index: 2; background: var(--card); }
+      .f2 { top: 0.5%; left: 28%; width: clamp(170px,20vw,230px); height: clamp(90px,10.5vw,120px); transform: rotate(3.5deg); z-index: 2; background: var(--card); }
       .f3 { top: 4%; right: -3%; width: clamp(185px,20vw,252px); height: clamp(255px,28vw,348px); transform: rotate(5deg); z-index: 3; background: var(--secondary); }
       .f4 { bottom: -5%; left: 0%; width: clamp(225px,27vw,322px); height: clamp(150px,18vw,222px); transform: rotate(-4deg); z-index: 3; background: var(--card); }
       .f5 { bottom: -2%; right: 25%; width: clamp(190px,24vw,272px); height: clamp(132px,16vw,200px); transform: rotate(3.2deg); z-index: 2; background: var(--secondary); }
