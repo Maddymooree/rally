@@ -57,17 +57,15 @@ export function Hero() {
 
         <h1
           className="font-display text-center text-white mb-6"
-          style={{ fontSize: "clamp(2.2rem,6vw,4.4rem)", fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.02em", maxWidth: "820px" }}
+          style={{ fontSize: "clamp(2.6rem,7.5vw,6rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.02em", maxWidth: "720px" }}
         >
-          going to a festival <span style={{ color: "var(--primary)" }}>alone?</span>
-          <br />
-          find your people before you get there.
+          you shouldn't have to <span style={{ color: "var(--primary)" }}>rally</span> alone.
         </h1>
 
-        <p className="font-body text-center mb-10 max-w-md" style={{ color: "color-mix(in srgb, var(--foreground) 50%, transparent)", fontSize: "1rem", lineHeight: 1.65 }}>
-          no dating. no swiping. no profiles to maintain.
+        <p className="font-body text-center mb-10 max-w-sm" style={{ color: "color-mix(in srgb, var(--foreground) 50%, transparent)", fontSize: "1rem", lineHeight: 1.65 }}>
+          no swiping. no profiles to maintain.
           <br />
-          just people headed to the same festivals, concerts, and trips as you.
+          just people headed to the same place as you.
         </p>
 
         <div className="flex flex-col items-center gap-4">
