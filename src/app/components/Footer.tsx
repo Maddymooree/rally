@@ -8,9 +8,15 @@ export function Footer() {
     >
       <div className="flex items-center gap-2.5">
         <span className="font-display font-black text-xl text-white">rally</span>
-        <span className="font-body text-xs" style={{ color: "var(--muted-foreground)" }}>
+        <a
+          href="https://www.instagram.com/youshouldrally"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-body text-xs hover:underline"
+          style={{ color: "var(--muted-foreground)" }}
+        >
           @youshouldrally
-        </span>
+        </a>
       </div>
       <div className="flex items-center gap-5 font-body text-xs" style={{ color: "color-mix(in srgb,var(--foreground) 45%,transparent)" }}>
         <Link to="/festivals" className="hover:underline">

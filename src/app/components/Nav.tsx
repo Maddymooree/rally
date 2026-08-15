@@ -31,16 +31,19 @@ export function Nav() {
         borderBottom: scrolled ? "1px solid var(--border)" : "none",
       }}
     >
-      <div className="flex-1 flex items-center">
-        <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
+      <div className="flex-1 flex items-center gap-2.5">
+        <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
           <span className="font-display font-black text-xl tracking-tight text-white">rally</span>
-          <span
-            className="font-body text-[10px] font-bold px-2 py-0.5 rounded-full"
-            style={{ background: "color-mix(in srgb, var(--primary) 12%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 22%, transparent)" }}
-          >
-            @youshouldrally
-          </span>
         </Link>
+        <a
+          href="https://www.instagram.com/youshouldrally"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-body text-[10px] font-bold px-2 py-0.5 rounded-full transition-opacity hover:opacity-80"
+          style={{ background: "color-mix(in srgb, var(--primary) 12%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 22%, transparent)" }}
+        >
+          @youshouldrally
+        </a>
       </div>
 
       <div className="nav-links-desktop hidden md:flex items-center justify-center gap-8">
