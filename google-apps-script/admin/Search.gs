@@ -1,13 +1,17 @@
 // The job: for each active watchlist artist, check every target city via
-// Ticketmaster (precise, city-scoped) and every artist once via Bandsintown
-// (artist-scoped — matched against our 6 cities by venue city text). Matches
-// land as `status: pending` rows only; nothing here ever touches `approved`.
+// Ticketmaster (precise, city-scoped) and, if a Bandsintown app_id is
+// configured, every artist once via Bandsintown too (artist-scoped —
+// matched against our 6 cities by venue city text). Bandsintown's API is
+// partner-gated now, so it's optional: leave BANDSINTOWN_APP_ID unset and
+// this skips it cleanly rather than failing every run. Matches land as
+// `status: pending` rows only; nothing here ever touches `approved`.
 function runSearchJob() {
   var runId = Utilities.getUuid();
   var startedAt = new Date().toISOString();
   var artistsSearched = 0;
   var eventsFound = 0;
   var notes = [];
+  var bandsintownEnabled = !!PropertiesService.getScriptProperties().getProperty(BANDSINTOWN_APP_ID_PROPERTY);
 
   try {
     var artists = listArtists().filter(function (a) { return a.active; });
@@ -29,6 +33,8 @@ function runSearchJob() {
           }
         });
       });
+
+      if (!bandsintownEnabled) return;
 
       names.forEach(function (name) {
         try {

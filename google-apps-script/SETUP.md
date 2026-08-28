@@ -27,15 +27,18 @@ here is free (no paid tiers required).
 
 ## 2. Get free API keys
 
-- **Bandsintown app ID**: go to https://artists.bandsintown.com/support/api-installation
-  and follow their instructions to get an `app_id`. It doesn't have to be
-  anything fancy — Bandsintown's artist-events endpoint just wants some
-  identifying string.
-- **Ticketmaster API key**: sign up at https://developer.ticketmaster.com/,
+- **Ticketmaster API key** (required): sign up at https://developer.ticketmaster.com/,
   create an app in their console, and copy the Consumer Key. The free tier
-  (5,000 calls/day) is far more than this needs.
+  (5,000 calls/day) is far more than this needs. This is the primary source
+  and does all the city-scoped searching.
+- **Bandsintown app ID** (optional, and likely not available to you):
+  Bandsintown's events API is partner-gated now — general signup isn't
+  really available anymore. If you happen to have access, it's a nice
+  secondary source; if not, just skip it. Leaving `BANDSINTOWN_APP_ID`
+  unset in Script Properties makes the search job skip Bandsintown
+  entirely rather than fail — Ticketmaster alone is sufficient.
 
-Keep both handy for step 4.
+Keep the Ticketmaster key handy for step 4.
 
 ## 3. Create the two Apps Script projects
 
