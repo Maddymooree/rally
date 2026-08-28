@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #070c1a;
+      --foreground: #eef0ff;
+      --card: #0d1428;
+      --primary: #7b8fff;
+      --primary-foreground: #070c1a;
+      --secondary: #121a35;
+      --muted-foreground: #5a6380;
+      --border: rgba(255,255,255,0.09);
+      --radius: 1rem;
+      --destructive: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, .display { font-family: 'Outfit', sans-serif; font-weight: 900; letter-spacing: -0.01em; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 32px 20px 80px; }
+    header { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    header .logo { font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif; color: #fff; }
+    header .pill {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 999px; color: var(--primary);
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+    }
+    nav.tabs { display: flex; gap: 6px; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+    nav.tabs button {
+      background: none; border: none; color: var(--muted-foreground);
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.02em; padding: 10px 14px; cursor: pointer;
+      border-bottom: 2px solid transparent; text-transform: lowercase;
+    }
+    nav.tabs button.active { color: var(--foreground); border-bottom-color: var(--primary); }
+    section.panel { display: none; }
+    section.panel.active { display: block; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 20px; margin-bottom: 14px;
+    }
+    label { display: block; font-size: 11px; font-weight: 600; text-transform: lowercase;
+      color: var(--muted-foreground); margin-bottom: 5px; letter-spacing: 0.02em; }
+    input[type=text], input[type=date], select {
+      width: 100%; background: var(--secondary); border: 1px solid var(--border);
+      color: var(--foreground); font-family: 'DM Sans', sans-serif; font-size: 13.5px;
+      padding: 9px 12px; border-radius: 10px; outline: none;
+    }
+    input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--primary); }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 140px; }
+    button.btn {
+      font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 13px;
+      border-radius: 999px; padding: 9px 18px; border: none; cursor: pointer;
+      text-transform: lowercase;
+    }
+    button.btn.primary { background: var(--primary); color: var(--primary-foreground); }
+    button.btn.ghost { background: transparent; color: var(--foreground); border: 1px solid var(--border); }
+    button.btn.danger { background: color-mix(in srgb, var(--destructive) 14%, transparent); color: var(--destructive); border: 1px solid color-mix(in srgb, var(--destructive) 30%, transparent); }
+    button.btn:disabled { opacity: 0.5; cursor: default; }
+    button.btn.small { padding: 6px 12px; font-size: 12px; }
+    .artist-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .artist-row:last-child { border-bottom: none; }
+    .artist-row .name { font-weight: 700; }
+    .artist-row .aliases { font-size: 11.5px; color: var(--muted-foreground); }
+    .artist-row .spacer { flex: 1; }
+    .pill-genre {
+      display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; padding: 2px 8px; border-radius: 999px; margin-right: 4px;
+      color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+    }
+    .muted { color: var(--muted-foreground); font-size: 12.5px; }
+    .status-line { font-size: 12.5px; color: var(--primary); margin-top: 10px; min-height: 16px; }
+    .error-line { font-size: 12.5px; color: var(--destructive); margin-top: 10px; min-height: 16px; }
+    a { color: var(--primary); }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    table th, table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); }
+    table th { color: var(--muted-foreground); font-weight: 600; text-transform: lowercase; }
+    .empty { color: var(--muted-foreground); font-size: 13px; padding: 20px 0; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="logo">rally</span>
+      <span class="pill">admin</span>
+    </header>
+
+    <nav class="tabs">
+      <button class="active" data-tab="watchlist">watchlist</button>
+      <button data-tab="pending">pending queue <span id="pendingCount"></span></button>
+      <button data-tab="runs">run log</button>
+    </nav>
+
+    <!-- WATCHLIST -->
+    <section class="panel active" id="panel-watchlist">
+      <div class="card">
+        <h2 style="margin:0 0 14px;font-size:16px;">add an artist</h2>
+        <div class="row">
+          <div>
+            <label>name</label>
+            <input type="text" id="newArtistName" placeholder="e.g. fisher">
+          </div>
+          <div>
+            <label>aliases (comma-separated, optional)</label>
+            <input type="text" id="newArtistAliases" placeholder="e.g. FISHER">
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <label>notes (optional)</label>
+          <input type="text" id="newArtistNotes" placeholder="e.g. techno sets only">
+        </div>
+        <div style="margin-top:14px;">
+          <button class="btn primary" id="addArtistBtn">add to watchlist</button>
+        </div>
+        <div class="error-line" id="addArtistError"></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <h2 style="margin:0;font-size:16px;">watching</h2>
+          <button class="btn primary" id="runSearchBtn">run search now</button>
+        </div>
+        <div class="status-line" id="searchStatus"></div>
+        <div id="artistList" style="margin-top:10px;"></div>
+      </div>
+    </section>
+
+    <!-- PENDING QUEUE -->
+    <section class="panel" id="panel-pending">
+      <div id="pendingList"></div>
+    </section>
+
+    <!-- RUN LOG -->
+    <section class="panel" id="panel-runs">
+      <div class="card">
+        <table>
+          <thead><tr><th>started</th><th>status</th><th>artists</th><th>found</th><th>notes</th></tr></thead>
+          <tbody id="runsBody"></tbody>
+        </table>
+        <div class="empty" id="runsEmpty" style="display:none;">no runs yet — try "run search now" from the watchlist tab.</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    var CITIES = [];
+
+    function $(id) { return document.getElementById(id); }
+
+    document.querySelectorAll('nav.tabs button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('nav.tabs button').forEach(function (b) { b.classList.remove('active'); });
+        document.querySelectorAll('section.panel').forEach(function (p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        $('panel-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      var d = new Date(iso);
+      if (isNaN(d)) return iso;
+      return d.toLocaleString(undefined, { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+    }
+
+    // ---- watchlist ----
+
+    function loadArtists() {
+      google.script.run.withSuccessHandler(renderArtists).withFailureHandler(showAddArtistError).adminListArtists();
+    }
+
+    function renderArtists(artists) {
+      var el = $('artistList');
+      if (!artists.length) { el.innerHTML = '<div class="empty">nothing on the watchlist yet.</div>'; return; }
+      el.innerHTML = '';
+      artists.forEach(function (a) {
+        var row = document.createElement('div');
+        row.className = 'artist-row';
+        row.innerHTML =
+          '<input type="checkbox" ' + (a.active ? 'checked' : '') + ' data-id="' + a.id + '" class="activeToggle">' +
+          '<div><div class="name">' + escapeHtml(a.name) + '</div>' +
+            (a.aliases.length ? '<div class="aliases">' + escapeHtml(a.aliases.join(', ')) + '</div>' : '') +
+            (a.notes ? '<div class="aliases">' + escapeHtml(a.notes) + '</div>' : '') +
+          '</div>' +
+          '<div class="spacer"></div>' +
+          '<button class="btn danger small" data-id="' + a.id + '">remove</button>';
+        row.querySelector('.activeToggle').addEventListener('change', function (e) {
+          google.script.run.adminSetArtistActive(a.id, e.target.checked);
+        });
+        row.querySelector('.btn.danger').addEventListener('click', function () {
+          if (!confirm('remove ' + a.name + ' from the watchlist?')) return;
+          google.script.run.withSuccessHandler(loadArtists).adminRemoveArtist(a.id);
+        });
+        el.appendChild(row);
+      });
+    }
+
+    function showAddArtistError(err) { $('addArtistError').textContent = err.message || String(err); }
+
+    $('addArtistBtn').addEventListener('click', function () {
+      var name = $('newArtistName').value.trim();
+      var aliases = $('newArtistAliases').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+      var notes = $('newArtistNotes').value.trim();
+      $('addArtistError').textContent = '';
+      google.script.run
+        .withSuccessHandler(function () {
+          $('newArtistName').value = ''; $('newArtistAliases').value = ''; $('newArtistNotes').value = '';
+          loadArtists();
+        })
+        .withFailureHandler(showAddArtistError)
+        .adminAddArtist(name, aliases, notes);
+    });
+
+    $('runSearchBtn').addEventListener('click', function () {
+      var btn = $('runSearchBtn');
+      btn.disabled = true;
+      $('searchStatus').textContent = 'searching bandsintown + ticketmaster for every city — this can take a minute…';
+      google.script.run
+        .withSuccessHandler(function (result) {
+          btn.disabled = false;
+          $('searchStatus').textContent = 'done — searched ' + result.artistsSearched + ' artist(s), found ' + result.eventsFound + ' new event(s).';
+          loadPending();
+          loadRuns();
+        })
+        .withFailureHandler(function (err) {
+          btn.disabled = false;
+          $('searchStatus').textContent = '';
+          alert('search job failed: ' + (err.message || err));
+        })
+        .adminRunSearchNow();
+    });
+
+    // ---- pending queue ----
+
+    function loadPending() {
+      google.script.run.withSuccessHandler(renderPending).adminListPendingEvents();
+    }
+
+    function renderPending(events) {
+      $('pendingCount').textContent = events.length ? '(' + events.length + ')' : '';
+      var el = $('pendingList');
+      if (!events.length) { el.innerHTML = '<div class="empty">no pending events — run a search from the watchlist tab.</div>'; return; }
+      el.innerHTML = '';
+      events.forEach(function (e) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        var cityOptions = CITIES.map(function (c) {
+          return '<option value="' + c.slug + '"' + (c.slug === e.city ? ' selected' : '') + '>' + c.name + '</option>';
+        }).join('');
+        card.innerHTML =
+          '<div class="row">' +
+            '<div><label>artist</label><input type="text" class="f-artist" value="' + escapeAttr(e.artist) + '"></div>' +
+            '<div><label>venue</label><input type="text" class="f-venue" value="' + escapeAttr(e.venue) + '"></div>' +
+          '</div>' +
+          '<div class="row" style="margin-top:10px;">' +
+            '<div><label>city</label><select class="f-city">' + cityOptions + '</select></div>' +
+            '<div><label>date</label><input type="date" class="f-date" value="' + escapeAttr(e.date) + '"></div>' +
+          '</div>' +
+          '<div style="margin-top:10px;"><label>genres (comma-separated)</label><input type="text" class="f-genres" value="' + escapeAttr(e.genres.join(', ')) + '"></div>' +
+          '<div style="margin-top:10px;"><label>source</label><div class="muted">' + escapeHtml(e.source) + (e.sourceUrl ? ' — <a href="' + escapeAttr(e.sourceUrl) + '" target="_blank" rel="noopener">view listing →</a>' : '') + '</div></div>' +
+          '<div style="margin-top:16px;display:flex;gap:8px;">' +
+            '<button class="btn primary approveBtn">approve</button>' +
+            '<button class="btn danger rejectBtn">reject</button>' +
+          '</div>' +
+          '<div class="error-line eventError"></div>';
+
+        function currentFields() {
+          return {
+            artist: card.querySelector('.f-artist').value.trim(),
+            venue: card.querySelector('.f-venue').value.trim(),
+            city: card.querySelector('.f-city').value,
+            date: card.querySelector('.f-date').value,
+            genres: card.querySelector('.f-genres').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean)
+          };
+        }
+
+        card.querySelector('.approveBtn').addEventListener('click', function () {
+          var btn = this; btn.disabled = true;
+          google.script.run
+            .withSuccessHandler(function () {
+              google.script.run.withSuccessHandler(loadPending).adminApproveEvent(e.id);
+            })
+            .withFailureHandler(function (err) { btn.disabled = false; card.querySelector('.eventError').textContent = err.message || String(err); })
+            .adminUpdatePendingEvent(e.id, currentFields());
+        });
+
+        card.querySelector('.rejectBtn').addEventListener('click', function () {
+          if (!confirm('reject this event?')) return;
+          google.script.run.withSuccessHandler(loadPending).adminRejectEvent(e.id);
+        });
+
+        el.appendChild(card);
+      });
+    }
+
+    // ---- run log ----
+
+    function loadRuns() {
+      google.script.run.withSuccessHandler(renderRuns).adminListSearchRuns();
+    }
+
+    function renderRuns(runs) {
+      var body = $('runsBody');
+      body.innerHTML = '';
+      $('runsEmpty').style.display = runs.length ? 'none' : 'block';
+      runs.forEach(function (r) {
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td>' + fmtDate(r.startedAt) + '</td>' +
+          '<td>' + escapeHtml(r.status) + '</td>' +
+          '<td>' + r.artistsSearched + '</td>' +
+          '<td>' + r.eventsFound + '</td>' +
+          '<td class="muted">' + escapeHtml((r.notes || '').slice(0, 140)) + '</td>';
+        body.appendChild(tr);
+      });
+    }
+
+    function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+    function escapeAttr(s) { return escapeHtml(s); }
+
+    google.script.run.withSuccessHandler(function (cities) { CITIES = cities; loadPending(); }).adminListCities();
+    loadArtists();
+    loadRuns();
+  </script>
+</body>
+</html>
