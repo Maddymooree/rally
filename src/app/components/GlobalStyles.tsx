@@ -137,6 +137,32 @@ export function GlobalStyles() {
         .hero-cta { padding-top: 10px !important; padding-bottom: 10px !important; font-size: 14px !important; }
       }
 
+      /* ── near-you: crowd scene ── */
+      .crowd-figure {
+        position: absolute;
+        transform-origin: bottom center;
+        will-change: transform, opacity;
+      }
+      .crowd-dancing {
+        animation: crowd-bounce var(--dance-duration, 1.8s) var(--dance-delay, 0s) ease-in-out infinite;
+        transition: opacity 0.4s ease;
+      }
+      .crowd-scattered {
+        animation: crowd-scatter 0.7s var(--scatter-delay, 0s) cubic-bezier(0.4, 0, 1, 1) forwards;
+      }
+      @keyframes crowd-bounce {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50%      { transform: translateY(-14%) rotate(-3deg); }
+      }
+      @keyframes crowd-scatter {
+        0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(60px) translateX(var(--scatter-x, 0)) rotate(-12deg); opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .crowd-dancing { animation: none; }
+        .crowd-scattered { animation-duration: 0.01s; }
+      }
+
       /* ── nav mobile dropdown ── */
       .nav-menu-btn { display: none; }
       .nav-dropdown { display: none; }

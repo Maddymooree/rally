@@ -24,9 +24,22 @@ export function ApplyForm() {
 
   useEffect(() => {
     const param = searchParams.get("festival");
-    if (!param) return;
-    const match = FESTIVALS.find((f) => f.slug.toLowerCase() === param.toLowerCase());
-    setForm((f) => ({ ...f, festival: match ? match.slug : "other" }));
+    const eventParam = searchParams.get("event");
+    const datesParam = searchParams.get("dates");
+    if (!param && !eventParam) return;
+
+    setForm((f) => {
+      const next = { ...f };
+      if (eventParam) {
+        next.festival = "other";
+        next.festivalOther = eventParam;
+      } else if (param) {
+        const match = FESTIVALS.find((fest) => fest.slug.toLowerCase() === param.toLowerCase());
+        next.festival = match ? match.slug : "other";
+      }
+      if (datesParam) next.dates = datesParam;
+      return next;
+    });
   }, [searchParams]);
 
   const field = (key: keyof typeof form) => ({

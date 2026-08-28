@@ -50,6 +50,9 @@ export function Nav() {
         <Link to="/festivals" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
           festivals
         </Link>
+        <Link to="/near-you" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
+          near you
+        </Link>
         <Link to="/safety" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
           safety
         </Link>
@@ -86,6 +89,9 @@ export function Nav() {
         >
           <Link to="/festivals" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
             festivals
+          </Link>
+          <Link to="/near-you" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
+            near you
           </Link>
           <Link to="/safety" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
             safety
