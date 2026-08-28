@@ -215,7 +215,7 @@ export function PhoneDemo() {
   }, [screen, inView]);
 
   const steps: Record<DemoScreen, { num: string; label: string; body: string }> = {
-    search: { num: "01", label: "pick your festival", body: "you pick where you're going. we take it from there." },
+    search: { num: "01", label: "pick your show", body: "you pick where you're going. we take it from there." },
     forming: { num: "02", label: "crew forms in real time", body: "grouped by vibe, experience, and logistics." },
     chat: { num: "03", label: "you're in", body: "group intro, real names, real plans. show up like you know them." },
   };

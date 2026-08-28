@@ -177,7 +177,7 @@ export function ApplyForm() {
               <>
                 <select required {...field("festival")} style={{ color: form.festival ? "var(--foreground)" : "var(--muted-foreground)" }}>
                   <option value="" disabled>
-                    which festival?
+                    which festival or show?
                   </option>
                   {FESTIVALS.map((f) => (
                     <option key={f.slug} value={f.slug}>
