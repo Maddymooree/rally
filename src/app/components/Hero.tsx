@@ -66,7 +66,7 @@ export function Hero() {
         <p className="hero-subtext font-body text-center mb-10 max-w-sm" style={{ color: "color-mix(in srgb, var(--foreground) 50%, transparent)", fontSize: "1rem", lineHeight: 1.65 }}>
           no swiping. no profiles to maintain.
           <br />
-          just connecting with people headed to the same festivals as you.
+          just connecting with people headed to the same shows as you.
         </p>
 
         <div className="flex flex-col items-center gap-4">
