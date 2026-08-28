@@ -26,7 +26,7 @@ export function AclBanner() {
       style={{ background: "color-mix(in srgb, var(--primary) 6%, transparent)", borderBottom: "1px solid var(--border)" }}
     >
       <button
-        onClick={() => navigate("/?festival=austin%20city%20limits#apply")}
+        onClick={() => navigate("/apply?festival=austin%20city%20limits")}
         className="w-full flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-6 py-3 text-center cursor-pointer transition-colors hover:bg-white/[0.02]"
       >
         <span className="flex items-center gap-2">

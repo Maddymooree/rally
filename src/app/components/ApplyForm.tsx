@@ -43,6 +43,9 @@ export function ApplyForm() {
         const match = FESTIVALS.find((fest) => fest.slug.toLowerCase() === param.toLowerCase());
         if (match) {
           next.festival = match.slug;
+        } else if (param.toLowerCase() === "other") {
+          // sentinel from "can't find it?" links — no specific destination yet
+          next.festival = "other";
         } else {
           next.festival = "other";
           next.festivalOther = param;

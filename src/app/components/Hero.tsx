@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import rally1 from "@/imports/rally1.jpg";
 import rally2 from "@/imports/rally2.jpg";
@@ -69,13 +70,13 @@ export function Hero() {
         </p>
 
         <div className="flex flex-col items-center gap-4">
-          <a
-            href="#apply"
+          <Link
+            to="/apply"
             className="hero-cta font-body flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all hover:opacity-90 active:scale-95"
             style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
           >
             find my crew <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

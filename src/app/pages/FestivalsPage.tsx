@@ -75,7 +75,7 @@ export function FestivalsPage() {
                   {fest.dates} · {fest.city}
                 </p>
                 <Link
-                  to={`/?festival=${encodeURIComponent(fest.slug)}#apply`}
+                  to={`/apply?festival=${encodeURIComponent(fest.slug)}`}
                   className="font-body text-sm font-semibold inline-flex items-center gap-1.5"
                   style={{ color: "var(--foreground)", borderBottom: "1px solid color-mix(in srgb, var(--foreground) 30%, transparent)", paddingBottom: "2px" }}
                 >
@@ -97,7 +97,7 @@ export function FestivalsPage() {
                 </p>
               </div>
               <Link
-                to="/?festival=other#apply"
+                to="/apply?festival=other"
                 className="font-body text-sm font-semibold inline-flex items-center gap-1.5"
                 style={{ color: "var(--foreground)", borderBottom: "1px solid color-mix(in srgb, var(--foreground) 30%, transparent)", paddingBottom: "2px" }}
               >

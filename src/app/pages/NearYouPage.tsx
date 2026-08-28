@@ -50,7 +50,7 @@ function EventCard({ event }: { event: ReturnType<typeof getEventsForCity>[numbe
           {event.venue} · {event.dateLabel}
         </p>
         <Link
-          to={`/?${params.toString()}#apply`}
+          to={`/apply?${params.toString()}`}
           className="mt-auto font-body text-sm font-bold text-center py-2.5 rounded-lg transition-all hover:opacity-90"
           style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
         >

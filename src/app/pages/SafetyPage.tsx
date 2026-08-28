@@ -72,7 +72,7 @@ export function SafetyPage() {
             ready to <span style={{ color: "var(--primary)" }}>rally</span> — safely?
           </h2>
           <Link
-            to="/#apply"
+            to="/apply"
             className="font-body px-8 py-4 rounded-full font-bold text-base transition-all hover:opacity-90 active:scale-95"
             style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
           >

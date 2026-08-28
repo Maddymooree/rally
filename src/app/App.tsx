@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import { FestivalsPage } from "./pages/FestivalsPage";
 import { SafetyPage } from "./pages/SafetyPage";
 import { NearYouPage } from "./pages/NearYouPage";
+import { ApplyPage } from "./pages/ApplyPage";
 
 function ScrollToHash() {
   const location = useLocation();
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/festivals" element={<FestivalsPage />} />
           <Route path="/near-you" element={<NearYouPage />} />
+          <Route path="/apply" element={<ApplyPage />} />
           <Route path="/safety" element={<SafetyPage />} />
         </Routes>
         <Footer />

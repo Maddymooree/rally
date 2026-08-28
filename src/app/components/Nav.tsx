@@ -15,7 +15,7 @@ export function Nav() {
 
   const goApply = () => {
     setOpen(false);
-    navigate("/#apply");
+    navigate("/apply");
   };
 
   const linkStyle: React.CSSProperties = {

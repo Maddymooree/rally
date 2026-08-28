@@ -30,7 +30,7 @@ export function FeaturedFestival() {
             {fest.dates} · {fest.city}
           </p>
           <Link
-            to={`/?festival=${encodeURIComponent(fest.slug)}#apply`}
+            to={`/apply?festival=${encodeURIComponent(fest.slug)}`}
             className="font-body block w-full py-3 rounded-lg text-sm font-bold text-center transition-all hover:opacity-90"
             style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
           >
