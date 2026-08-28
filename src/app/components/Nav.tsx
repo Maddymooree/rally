@@ -47,11 +47,11 @@ export function Nav() {
       </div>
 
       <div className="nav-links-desktop hidden md:flex items-center justify-center gap-8">
-        <Link to="/festivals" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
-          festivals
-        </Link>
         <Link to="/near-you" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
           near you
+        </Link>
+        <Link to="/festivals" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
+          festivals
         </Link>
         <Link to="/safety" className="font-body text-xs font-semibold uppercase tracking-widest" style={linkStyle}>
           safety
@@ -87,11 +87,11 @@ export function Nav() {
           className="absolute top-full right-6 mt-3 flex flex-col rounded-2xl p-2 min-w-[180px]"
           style={{ background: "var(--card)", border: "1px solid var(--border)", boxShadow: "0 16px 40px rgba(0,0,0,0.5)" }}
         >
-          <Link to="/festivals" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
-            festivals
-          </Link>
           <Link to="/near-you" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
             near you
+          </Link>
+          <Link to="/festivals" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
+            festivals
           </Link>
           <Link to="/safety" className="font-body text-sm font-medium px-4 py-3 rounded-xl" style={{ color: "var(--foreground)" }} onClick={() => setOpen(false)}>
             safety
