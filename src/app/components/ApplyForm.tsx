@@ -21,6 +21,10 @@ export function ApplyForm() {
   });
   const [status, setStatus] = useState<Status>({ kind: "idle", message: "" });
   const [ageError, setAgeError] = useState("");
+  // true when we arrived with a specific event/festival already picked
+  // (from a card elsewhere on the site) — collapses the dropdown + "other"
+  // input into a single pre-filled, editable field.
+  const [presetDestination, setPresetDestination] = useState(false);
 
   useEffect(() => {
     const param = searchParams.get("festival");
@@ -28,18 +32,27 @@ export function ApplyForm() {
     const datesParam = searchParams.get("dates");
     if (!param && !eventParam) return;
 
+    let preset = false;
     setForm((f) => {
       const next = { ...f };
       if (eventParam) {
         next.festival = "other";
         next.festivalOther = eventParam;
+        preset = true;
       } else if (param) {
         const match = FESTIVALS.find((fest) => fest.slug.toLowerCase() === param.toLowerCase());
-        next.festival = match ? match.slug : "other";
+        if (match) {
+          next.festival = match.slug;
+        } else {
+          next.festival = "other";
+          next.festivalOther = param;
+          preset = true;
+        }
       }
       if (datesParam) next.dates = datesParam;
       return next;
     });
+    if (preset) setPresetDestination(true);
   }, [searchParams]);
 
   const field = (key: keyof typeof form) => ({
@@ -155,20 +168,26 @@ export function ApplyForm() {
               <input required placeholder="instagram handle" {...field("instagram")} />
             </div>
             <input required type="email" placeholder="email" {...field("email")} />
-            <select required {...field("festival")} style={{ color: form.festival ? "var(--foreground)" : "var(--muted-foreground)" }}>
-              <option value="" disabled>
-                which festival?
-              </option>
-              {FESTIVALS.map((f) => (
-                <option key={f.slug} value={f.slug}>
-                  {f.name}
-                  {f.sub ? ` — ${f.sub}` : ""}
-                </option>
-              ))}
-              <option value="other">don't see it? let us know →</option>
-            </select>
-            {isOther && (
-              <input required placeholder="tell us where you're headed" {...field("festivalOther")} />
+            {presetDestination ? (
+              <input required placeholder="where are you headed" {...field("festivalOther")} />
+            ) : (
+              <>
+                <select required {...field("festival")} style={{ color: form.festival ? "var(--foreground)" : "var(--muted-foreground)" }}>
+                  <option value="" disabled>
+                    which festival?
+                  </option>
+                  {FESTIVALS.map((f) => (
+                    <option key={f.slug} value={f.slug}>
+                      {f.name}
+                      {f.sub ? ` — ${f.sub}` : ""}
+                    </option>
+                  ))}
+                  <option value="other">don't see it? let us know →</option>
+                </select>
+                {isOther && (
+                  <input required placeholder="tell us where you're headed" {...field("festivalOther")} />
+                )}
+              </>
             )}
             <div className="grid sm:grid-cols-2 gap-3.5">
               <input required placeholder="your dates (e.g. july 22–26)" {...field("dates")} />
