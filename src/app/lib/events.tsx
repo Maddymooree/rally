@@ -7,12 +7,12 @@
  * for manual review. Only events an admin approves ever reach this fetch;
  * see google-apps-script/SCHEMA.md for the full pipeline.
  *
- * PASTE YOUR DEPLOYED events-api URL BELOW after following
- * google-apps-script/SETUP.md. Until then this returns no events (the
- * discovery page just shows its normal empty state) rather than any
- * placeholder data — there is no "fake events" fallback by design.
+ * Backed by the deployed google-apps-script/events-api/ project — see
+ * google-apps-script/SETUP.md for how to redeploy it if this URL ever
+ * changes.
  */
-export const EVENTS_API_URL = "";
+export const EVENTS_API_URL =
+  "https://script.google.com/macros/s/AKfycbyL3wBpxI-XCLd1g08g4w1IP-bs7UR6wGBhyhZuX5QLesSvI-053Uv-Y9GkvPxR7XO3/exec";
 
 export type EventGenre = "edm" | "house" | "techno" | "electronic" | "dance" | "dj set";
 export type EventStatus = "approved" | "pending" | "hidden" | "rejected";
