@@ -19,6 +19,7 @@ function adminListPendingEvents() { return listPendingEvents(); }
 function adminUpdatePendingEvent(id, fields) { return updatePendingEvent(id, fields); }
 function adminApproveEvent(id) { return approveEvent(id); }
 function adminRejectEvent(id) { return rejectEvent(id); }
+function adminAddManualEvent(fields) { return addManualEvent(fields); }
 
 function adminRunSearchNow() { return runSearchJob(); }
 function adminListSearchRuns() { return listSearchRuns(); }

@@ -139,6 +139,26 @@
 
     <!-- PENDING QUEUE -->
     <section class="panel" id="panel-pending">
+      <div class="card">
+        <h2 style="margin:0 0 14px;font-size:16px;">add an event manually</h2>
+        <div class="row">
+          <div><label>artist</label><input type="text" id="manualArtist" placeholder="e.g. fisher"></div>
+          <div><label>venue</label><input type="text" id="manualVenue" placeholder="e.g. stereo live"></div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <div><label>city</label><select id="manualCity"></select></div>
+          <div><label>date</label><input type="date" id="manualDate"></div>
+        </div>
+        <div style="margin-top:10px;"><label>genres (comma-separated, optional)</label><input type="text" id="manualGenres" placeholder="e.g. house, dj set"></div>
+        <div class="row" style="margin-top:10px;">
+          <div><label>ticket url (optional)</label><input type="text" id="manualTicketUrl" placeholder="https://..."></div>
+          <div><label>source url (optional)</label><input type="text" id="manualSourceUrl" placeholder="https://... — where you heard about it"></div>
+        </div>
+        <div style="margin-top:14px;">
+          <button class="btn primary" id="addEventBtn">add to queue</button>
+        </div>
+        <div class="error-line" id="addEventError"></div>
+      </div>
       <div id="pendingList"></div>
     </section>
 
@@ -244,6 +264,33 @@
 
     // ---- pending queue ----
 
+    function renderManualCityOptions() {
+      $('manualCity').innerHTML = CITIES.map(function (c) {
+        return '<option value="' + c.slug + '">' + c.name + '</option>';
+      }).join('');
+    }
+
+    $('addEventBtn').addEventListener('click', function () {
+      var fields = {
+        artist: $('manualArtist').value.trim(),
+        venue: $('manualVenue').value.trim(),
+        city: $('manualCity').value,
+        date: $('manualDate').value,
+        genres: $('manualGenres').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+        ticketUrl: $('manualTicketUrl').value.trim(),
+        sourceUrl: $('manualSourceUrl').value.trim()
+      };
+      $('addEventError').textContent = '';
+      google.script.run
+        .withSuccessHandler(function () {
+          $('manualArtist').value = ''; $('manualVenue').value = ''; $('manualDate').value = '';
+          $('manualGenres').value = ''; $('manualTicketUrl').value = ''; $('manualSourceUrl').value = '';
+          loadPending();
+        })
+        .withFailureHandler(function (err) { $('addEventError').textContent = err.message || String(err); })
+        .adminAddManualEvent(fields);
+    });
+
     function loadPending() {
       google.script.run.withSuccessHandler(renderPending).adminListPendingEvents();
     }
@@ -330,7 +377,7 @@
     function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
     function escapeAttr(s) { return escapeHtml(s); }
 
-    google.script.run.withSuccessHandler(function (cities) { CITIES = cities; loadPending(); }).adminListCities();
+    google.script.run.withSuccessHandler(function (cities) { CITIES = cities; renderManualCityOptions(); loadPending(); }).adminListCities();
     loadArtists();
     loadRuns();
   </script>

@@ -92,6 +92,38 @@ function updatePendingEvent(id, fields) {
   updateRow_(TAB_EVENTS, EVENT_COLUMNS, row._row, row);
 }
 
+// For events you already know about and want to add without waiting on a
+// search run — lands in the same pending queue, source "manual", so it goes
+// through the same edit/approve/reject flow as anything the search job finds.
+function addManualEvent(fields) {
+  var artist = (fields.artist || '').trim();
+  var venue = (fields.venue || '').trim();
+  var city = (fields.city || '').trim();
+  var date = (fields.date || '').trim();
+  if (!artist || !venue || !city || !date) {
+    throw new Error('artist, venue, city, and date are all required.');
+  }
+
+  var result = insertPendingEvent_({
+    artist: artist,
+    venue: venue,
+    city: city,
+    date: date,
+    genres: fields.genres || [],
+    sourceUrl: fields.sourceUrl || '',
+    ticketUrl: fields.ticketUrl || '',
+    source: 'manual'
+  });
+
+  if (!result.inserted) {
+    throw new Error(
+      result.reason === 'previously_rejected'
+        ? 'This exact artist/venue/date was rejected before — edit the details if this is actually a different show.'
+        : 'This exact artist/venue/date is already pending or live.'
+    );
+  }
+}
+
 function approveEvent(id) {
   setEventStatus_(id, STATUS.APPROVED);
 }
