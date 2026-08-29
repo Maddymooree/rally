@@ -39,7 +39,6 @@ export interface City {
 
 export const CITIES: City[] = [
   { slug: "dallas", name: "dallas" },
-  { slug: "houston", name: "houston" },
   { slug: "new-york", name: "new york" },
   { slug: "los-angeles", name: "los angeles" },
   { slug: "miami", name: "miami" },
