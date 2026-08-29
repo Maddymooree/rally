@@ -128,5 +128,3 @@ export const FESTIVALS: Festival[] = [
     ),
   },
 ];
-
-export const FEATURED_FESTIVAL = FESTIVALS[0];
