@@ -52,3 +52,28 @@ export function getEventsForCity(citySlug: string): RallyEvent[] {
     a.date.localeCompare(b.date)
   );
 }
+
+// A range dateLabel (e.g. "oct 15–18, 2026") always uses an en dash — every
+// single-date label comes from formatDateLabel_ in Github.gs, which never
+// produces one. Used to infer festival-style (apply now) vs a single-night
+// club show (find your crew) since the data doesn't carry an explicit type.
+export function isMultiNightEvent(event: RallyEvent): boolean {
+  return event.dateLabel.includes("–");
+}
+
+// The soonest approved event across every near-you city, for the homepage's
+// "up next" card. Re-run against the current date on every page load /
+// rebuild — there's no separate "refresh" step needed.
+export function getNextUpcomingEvent(referenceDate: Date = new Date()): RallyEvent | null {
+  const todayStr = referenceDate.toISOString().slice(0, 10);
+  const upcoming = EVENTS.filter((e) => e.status === "approved" && e.date >= todayStr);
+  if (upcoming.length === 0) return null;
+
+  upcoming.sort((a, b) => {
+    if (a.date !== b.date) return a.date.localeCompare(b.date);
+    if (!!a.featured !== !!b.featured) return a.featured ? -1 : 1;
+    return a.artist.localeCompare(b.artist);
+  });
+
+  return upcoming[0];
+}
