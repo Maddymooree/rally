@@ -64,7 +64,7 @@ function tryInsert_(candidate, citySlug, artistId, today, cutoff, notes) {
   if (eventDate < today || eventDate > cutoff) return 0;
 
   var genres = candidate.genres.length
-    ? candidate.genres.map(normalizeGenre_).filter(Boolean)
+    ? uniq_(candidate.genres.map(normalizeGenre_).filter(Boolean))
     : suggestGenresForArtist_(candidate.artist);
 
   var result = insertPendingEvent_({
@@ -83,6 +83,10 @@ function tryInsert_(candidate, citySlug, artistId, today, cutoff, notes) {
     notes.push(candidate.artist + ' @ ' + candidate.venue + ' (' + candidate.date + '): previously rejected, skipping');
   }
   return result.inserted ? 1 : 0;
+}
+
+function uniq_(arr) {
+  return arr.filter(function (v, i) { return arr.indexOf(v) === i; });
 }
 
 function matchCityFromText_(text) {
