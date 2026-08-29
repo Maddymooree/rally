@@ -5,7 +5,9 @@ import { CITIES, getUpcomingEvents, isMultiNightEvent, type RallyEvent } from ".
 
 function UpNextCard({ event }: { event: RallyEvent }) {
   const cityName = CITIES.find((c) => c.slug === event.city)?.name ?? event.city;
-  const ctaLabel = isMultiNightEvent(event) ? "apply now →" : "find your crew →";
+  const multiNight = isMultiNightEvent(event);
+  const ctaLabel = multiNight ? "apply now →" : "find your crew →";
+  const badgeLabel = multiNight ? "● applications open" : "● find your crew";
   const params = new URLSearchParams({
     festival: "other",
     event: `${event.artist} @ ${event.venue}`,
@@ -30,7 +32,7 @@ function UpNextCard({ event }: { event: RallyEvent }) {
           className="font-body text-[11px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
           style={{ background: "color-mix(in srgb, var(--primary) 16%, transparent)", color: "var(--primary)" }}
         >
-          ● applications open
+          {badgeLabel}
         </span>
       </div>
       <h3 className="font-display font-black text-xl text-white mb-1 text-left lowercase">{event.artist}</h3>
@@ -49,7 +51,7 @@ function UpNextCard({ event }: { event: RallyEvent }) {
 }
 
 export function FeaturedFestival() {
-  const events = getUpcomingEvents(8);
+  const events = getUpcomingEvents(10);
   const trackRef = useRef<HTMLDivElement>(null);
 
   if (events.length === 0) return null;
