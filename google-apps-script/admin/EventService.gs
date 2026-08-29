@@ -124,12 +124,54 @@ function addManualEvent(fields) {
   }
 }
 
+// Approved + hidden together, so hiding something stays reversible from the
+// same view instead of quietly falling off the edge of the admin page.
+function listManagedEvents() {
+  return readRows_(TAB_EVENTS, EVENT_COLUMNS)
+    .filter(function (e) { return e.status === STATUS.APPROVED || e.status === STATUS.HIDDEN; })
+    .map(formatEventForAdmin_)
+    .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+}
+
+// Editing a live/hidden event — used to fix a typo, or to correct an
+// accidental approval before hiding it. Unlike updatePendingEvent, this also
+// allows toggling `featured`.
+function updateLiveEvent(id, fields) {
+  var row = findRow_(TAB_EVENTS, EVENT_COLUMNS, id);
+  if (!row) throw new Error('Event not found.');
+  if (row.status !== STATUS.APPROVED && row.status !== STATUS.HIDDEN) {
+    throw new Error('Only approved or hidden events can be edited here.');
+  }
+
+  ['artist', 'venue', 'city', 'date', 'sourceUrl'].forEach(function (f) {
+    if (fields[f] === undefined) return;
+    var col = f === 'sourceUrl' ? 'source_url' : f;
+    row[col] = fields[f];
+  });
+  if (fields.genres !== undefined) row.genres = (fields.genres || []).join(', ');
+  if (fields.featured !== undefined) row.featured = !!fields.featured;
+
+  row.dedupe_key = dedupeKey_(row.artist, row.venue, row.date);
+  row.updated_at = new Date().toISOString();
+  updateRow_(TAB_EVENTS, EVENT_COLUMNS, row._row, row);
+}
+
 function approveEvent(id) {
   setEventStatus_(id, STATUS.APPROVED);
 }
 
 function rejectEvent(id) {
   setEventStatus_(id, STATUS.REJECTED);
+}
+
+// Pulls an approved event off the public site without deleting it — the
+// fix for "I approved this by accident." Reversible via unhideEvent.
+function hideEvent(id) {
+  setEventStatus_(id, STATUS.HIDDEN);
+}
+
+function unhideEvent(id) {
+  setEventStatus_(id, STATUS.APPROVED);
 }
 
 function setEventStatus_(id, status) {

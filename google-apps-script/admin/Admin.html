@@ -100,6 +100,7 @@
     <nav class="tabs">
       <button class="active" data-tab="watchlist">watchlist</button>
       <button data-tab="pending">pending queue <span id="pendingCount"></span></button>
+      <button data-tab="live">live <span id="liveCount"></span></button>
       <button data-tab="runs">run log</button>
     </nav>
 
@@ -160,6 +161,11 @@
         <div class="error-line" id="addEventError"></div>
       </div>
       <div id="pendingList"></div>
+    </section>
+
+    <!-- LIVE -->
+    <section class="panel" id="panel-live">
+      <div id="liveList"></div>
     </section>
 
     <!-- RUN LOG -->
@@ -337,7 +343,7 @@
           var btn = this; btn.disabled = true;
           google.script.run
             .withSuccessHandler(function () {
-              google.script.run.withSuccessHandler(loadPending).adminApproveEvent(e.id);
+              google.script.run.withSuccessHandler(function () { loadPending(); loadLive(); }).adminApproveEvent(e.id);
             })
             .withFailureHandler(function (err) { btn.disabled = false; card.querySelector('.eventError').textContent = err.message || String(err); })
             .adminUpdatePendingEvent(e.id, currentFields());
@@ -346,6 +352,74 @@
         card.querySelector('.rejectBtn').addEventListener('click', function () {
           if (!confirm('reject this event?')) return;
           google.script.run.withSuccessHandler(loadPending).adminRejectEvent(e.id);
+        });
+
+        el.appendChild(card);
+      });
+    }
+
+    // ---- live (approved + hidden) ----
+
+    function loadLive() {
+      google.script.run.withSuccessHandler(renderLive).adminListManagedEvents();
+    }
+
+    function renderLive(events) {
+      $('liveCount').textContent = events.length ? '(' + events.length + ')' : '';
+      var el = $('liveList');
+      if (!events.length) { el.innerHTML = '<div class="empty">nothing live yet — approve something from the pending queue.</div>'; return; }
+      el.innerHTML = '';
+      events.forEach(function (e) {
+        var isHidden = e.status === 'hidden';
+        var card = document.createElement('div');
+        card.className = 'card';
+        var cityOptions = CITIES.map(function (c) {
+          return '<option value="' + c.slug + '"' + (c.slug === e.city ? ' selected' : '') + '>' + c.name + '</option>';
+        }).join('');
+        card.innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+            '<span class="pill-genre"' + (isHidden ? ' style="color:var(--muted-foreground);background:transparent;border-color:var(--border);"' : '') + '>' + (isHidden ? 'hidden' : 'live') + '</span>' +
+            '<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" class="f-featured" ' + (e.featured ? 'checked' : '') + '><span class="muted">featured</span></label>' +
+          '</div>' +
+          '<div class="row">' +
+            '<div><label>artist</label><input type="text" class="f-artist" value="' + escapeAttr(e.artist) + '"></div>' +
+            '<div><label>venue</label><input type="text" class="f-venue" value="' + escapeAttr(e.venue) + '"></div>' +
+          '</div>' +
+          '<div class="row" style="margin-top:10px;">' +
+            '<div><label>city</label><select class="f-city">' + cityOptions + '</select></div>' +
+            '<div><label>date</label><input type="date" class="f-date" value="' + escapeAttr(e.date) + '"></div>' +
+          '</div>' +
+          '<div style="margin-top:10px;"><label>genres (comma-separated)</label><input type="text" class="f-genres" value="' + escapeAttr(e.genres.join(', ')) + '"></div>' +
+          '<div style="margin-top:16px;display:flex;gap:8px;">' +
+            '<button class="btn ghost saveBtn">save changes</button>' +
+            (isHidden ? '<button class="btn primary toggleBtn">unhide</button>' : '<button class="btn danger toggleBtn">hide</button>') +
+          '</div>' +
+          '<div class="error-line eventError"></div>';
+
+        function currentFields() {
+          return {
+            artist: card.querySelector('.f-artist').value.trim(),
+            venue: card.querySelector('.f-venue').value.trim(),
+            city: card.querySelector('.f-city').value,
+            date: card.querySelector('.f-date').value,
+            genres: card.querySelector('.f-genres').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+            featured: card.querySelector('.f-featured').checked
+          };
+        }
+
+        card.querySelector('.saveBtn').addEventListener('click', function () {
+          google.script.run
+            .withSuccessHandler(loadLive)
+            .withFailureHandler(function (err) { card.querySelector('.eventError').textContent = err.message || String(err); })
+            .adminUpdateLiveEvent(e.id, currentFields());
+        });
+
+        card.querySelector('.toggleBtn').addEventListener('click', function () {
+          var fn = isHidden ? 'adminUnhideEvent' : 'adminHideEvent';
+          google.script.run
+            .withSuccessHandler(loadLive)
+            .withFailureHandler(function (err) { card.querySelector('.eventError').textContent = err.message || String(err); })
+            [fn](e.id);
         });
 
         el.appendChild(card);
@@ -377,7 +451,7 @@
     function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
     function escapeAttr(s) { return escapeHtml(s); }
 
-    google.script.run.withSuccessHandler(function (cities) { CITIES = cities; renderManualCityOptions(); loadPending(); }).adminListCities();
+    google.script.run.withSuccessHandler(function (cities) { CITIES = cities; renderManualCityOptions(); loadPending(); loadLive(); }).adminListCities();
     loadArtists();
     loadRuns();
   </script>

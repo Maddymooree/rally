@@ -21,6 +21,11 @@ function adminApproveEvent(id) { return approveEvent(id); }
 function adminRejectEvent(id) { return rejectEvent(id); }
 function adminAddManualEvent(fields) { return addManualEvent(fields); }
 
+function adminListManagedEvents() { return listManagedEvents(); }
+function adminUpdateLiveEvent(id, fields) { return updateLiveEvent(id, fields); }
+function adminHideEvent(id) { return hideEvent(id); }
+function adminUnhideEvent(id) { return unhideEvent(id); }
+
 function adminRunSearchNow() { return runSearchJob(); }
 function adminListSearchRuns() { return listSearchRuns(); }
 function adminListCities() { return CITIES; }
