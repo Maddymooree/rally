@@ -1,7 +1,15 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CITIES, getUpcomingEvents, isMultiNightEvent, type RallyEvent } from "../lib/events";
+
+// The set is rendered 3x back to back and the scroll position starts in the
+// middle copy, so there's always more track to scroll into in either
+// direction. A scroll listener silently (no animation) re-centers back into
+// the middle copy once the user drifts into a neighboring copy — that jump
+// is imperceptible since it's an exact duplicate of what's already there,
+// which is what makes the loop read as continuous instead of dead-ending.
+const LOOP_COPIES = 3;
 
 function UpNextCard({ event }: { event: RallyEvent }) {
   const cityName = CITIES.find((c) => c.slug === event.city)?.name ?? event.city;
@@ -35,7 +43,19 @@ function UpNextCard({ event }: { event: RallyEvent }) {
           {badgeLabel}
         </span>
       </div>
-      <h3 className="font-display font-black text-xl text-white mb-1 text-left lowercase">{event.artist}</h3>
+      <h3
+        className="font-display font-black text-xl text-white mb-1 text-left lowercase"
+        title={event.artist}
+        style={{
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          minHeight: "3.5rem",
+        }}
+      >
+        {event.artist}
+      </h3>
       <p className="font-body text-sm text-left mb-6" style={{ color: "var(--muted-foreground)" }}>
         {event.dateLabel} · {event.venue}, {cityName}
       </p>
@@ -53,12 +73,43 @@ function UpNextCard({ event }: { event: RallyEvent }) {
 export function FeaturedFestival() {
   const events = getUpcomingEvents(10);
   const trackRef = useRef<HTMLDivElement>(null);
+  const settleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const loop = events.length > 1;
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || !loop) return;
+    track.scrollLeft = track.scrollWidth / LOOP_COPIES;
+  }, [loop, events.length]);
 
   if (events.length === 0) return null;
+
+  const recenter = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const oneSetWidth = track.scrollWidth / LOOP_COPIES;
+    if (track.scrollLeft < oneSetWidth * 0.5) {
+      track.scrollLeft += oneSetWidth;
+    } else if (track.scrollLeft > oneSetWidth * 1.5) {
+      track.scrollLeft -= oneSetWidth;
+    }
+  };
+
+  const handleScroll = () => {
+    if (!loop) return;
+    if (settleTimer.current) clearTimeout(settleTimer.current);
+    settleTimer.current = setTimeout(recenter, 120);
+  };
 
   const scroll = (dir: 1 | -1) => {
     trackRef.current?.scrollBy({ left: dir * 330, behavior: "smooth" });
   };
+
+  const renderedCards = loop
+    ? Array.from({ length: LOOP_COPIES }).flatMap((_, copyIndex) =>
+        events.map((event) => <UpNextCard key={`${event.id}-${copyIndex}`} event={event} />)
+      )
+    : events.map((event) => <UpNextCard key={event.id} event={event} />);
 
   return (
     <section className="py-24" style={{ background: "var(--card)", borderTop: "1px solid var(--border)" }}>
@@ -73,16 +124,15 @@ export function FeaturedFestival() {
 
       <div
         ref={trackRef}
+        onScroll={handleScroll}
         className="up-next-track flex gap-5 overflow-x-auto pb-2 px-6 md:px-12"
         style={{ scrollSnapType: "x mandatory" }}
       >
-        {events.map((event) => (
-          <UpNextCard key={event.id} event={event} />
-        ))}
+        {renderedCards}
       </div>
 
       <div className="text-center px-6 md:px-12">
-        {events.length > 1 && (
+        {loop && (
           <div className="hidden sm:flex items-center justify-center gap-3 mt-6">
             <button
               onClick={() => scroll(-1)}
