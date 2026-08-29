@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { CrowdScene } from "../components/CrowdScene";
-import { CITIES, getEventsForCity, type EventGenre, type RallyEvent } from "../lib/events";
+import { CITIES, getEventsForCity, getUpcomingEvents, type EventGenre, type RallyEvent } from "../lib/events";
 
-function EventCard({ event }: { event: RallyEvent }) {
+function EventCard({ event, showCity = false }: { event: RallyEvent; showCity?: boolean }) {
+  const cityName = CITIES.find((c) => c.slug === event.city)?.name;
   const params = new URLSearchParams({
     festival: "other",
     event: `${event.artist} @ ${event.venue}`,
@@ -47,7 +48,7 @@ function EventCard({ event }: { event: RallyEvent }) {
       <div className="p-5 flex flex-col flex-1">
         <h3 className="font-display font-black text-xl text-white mb-1 lowercase">{event.artist}</h3>
         <p className="font-body text-sm mb-4" style={{ color: "var(--muted-foreground)" }}>
-          {event.venue} · {event.dateLabel}
+          {event.venue}{showCity && cityName ? `, ${cityName}` : ""} · {event.dateLabel}
         </p>
         <Link
           to={`/apply?${params.toString()}`}
@@ -70,6 +71,7 @@ function DiscoveryView() {
     setGenre(null);
   };
 
+  const previewEvents = city ? [] : getUpcomingEvents(6);
   const allEvents = city ? getEventsForCity(city) : [];
   const availableGenres = Array.from(new Set(allEvents.flatMap((e) => e.genres)));
   const events = genre ? allEvents.filter((e) => e.genres.includes(genre)) : allEvents;
@@ -139,9 +141,27 @@ function DiscoveryView() {
           )}
 
           {!city && (
-            <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
-              pick a city above to see what's coming up.
-            </p>
+            <>
+              <p className="font-body text-sm text-center mb-10" style={{ color: "var(--muted-foreground)" }}>
+                pick a city above to see what's coming up.
+              </p>
+              {previewEvents.length > 0 && (
+                <>
+                  <div className="flex items-center justify-center gap-3 mb-8">
+                    <span style={{ height: 1, width: 32, background: "var(--border)" }} />
+                    <p className="font-body text-xs font-bold uppercase tracking-wider" style={{ color: "var(--primary)" }}>
+                      trending across every city
+                    </p>
+                    <span style={{ height: 1, width: 32, background: "var(--border)" }} />
+                  </div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {previewEvents.map((event) => (
+                      <EventCard key={event.id} event={event} showCity />
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
           )}
 
           {city && allEvents.length === 0 && (
