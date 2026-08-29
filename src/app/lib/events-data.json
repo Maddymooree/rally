@@ -1,5 +1,20 @@
 [
   {
+    "id": "hugel-navy-pier-2026-09-13",
+    "artist": "hugel",
+    "venue": "navy pier",
+    "city": "chicago",
+    "date": "2026-09-13",
+    "dateLabel": "sep 13, 2026",
+    "genres": ["house"],
+    "imageUrl": null,
+    "ticketUrl": null,
+    "featured": false,
+    "status": "approved",
+    "source": "manual",
+    "sourceId": "hugel-navy-pier-2026-09-13"
+  },
+  {
     "id": "prospa-silo-dallas-2026-10-10",
     "artist": "prospa",
     "venue": "silo dallas",
