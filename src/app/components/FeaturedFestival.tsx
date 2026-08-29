@@ -14,7 +14,7 @@ function UpNextCard({ event }: { event: RallyEvent }) {
 
   return (
     <div
-      className="up-next-card shrink-0 p-7 rounded-2xl anim-glow"
+      className="up-next-card shrink-0 p-7 rounded-2xl"
       style={{
         width: "310px",
         scrollSnapAlign: "start",
@@ -59,47 +59,47 @@ export function FeaturedFestival() {
   };
 
   return (
-    <section className="py-24 px-6 md:px-12" style={{ background: "var(--card)", borderTop: "1px solid var(--border)" }}>
-      <div className="max-w-5xl mx-auto text-center">
+    <section className="py-24" style={{ background: "var(--card)", borderTop: "1px solid var(--border)" }}>
+      <div className="text-center px-6 md:px-12">
         <p className="font-body text-[11px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: "var(--primary)" }}>
           happening soon
         </p>
         <h2 className="font-display font-black text-white mb-10" style={{ fontSize: "clamp(2rem,5vw,3.2rem)" }}>
           find your crew.
         </h2>
+      </div>
 
-        <div className="relative">
-          <div
-            ref={trackRef}
-            className="up-next-track flex gap-5 overflow-x-auto pb-2"
-            style={{ scrollSnapType: "x mandatory" }}
-          >
-            {events.map((event) => (
-              <UpNextCard key={event.id} event={event} />
-            ))}
+      <div
+        ref={trackRef}
+        className="up-next-track flex gap-5 overflow-x-auto pb-2 px-6 md:px-12"
+        style={{ scrollSnapType: "x mandatory" }}
+      >
+        {events.map((event) => (
+          <UpNextCard key={event.id} event={event} />
+        ))}
+      </div>
+
+      <div className="text-center px-6 md:px-12">
+        {events.length > 1 && (
+          <div className="hidden sm:flex items-center justify-center gap-3 mt-6">
+            <button
+              onClick={() => scroll(-1)}
+              aria-label="previous"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+              style={{ background: "var(--secondary)", border: "1px solid var(--border)", color: "var(--foreground)" }}
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={() => scroll(1)}
+              aria-label="next"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+              style={{ background: "var(--secondary)", border: "1px solid var(--border)", color: "var(--foreground)" }}
+            >
+              <ChevronRight size={16} />
+            </button>
           </div>
-
-          {events.length > 1 && (
-            <div className="hidden sm:flex items-center justify-center gap-3 mt-6">
-              <button
-                onClick={() => scroll(-1)}
-                aria-label="previous"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                style={{ background: "var(--secondary)", border: "1px solid var(--border)", color: "var(--foreground)" }}
-              >
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                onClick={() => scroll(1)}
-                aria-label="next"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                style={{ background: "var(--secondary)", border: "1px solid var(--border)", color: "var(--foreground)" }}
-              >
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          )}
-        </div>
+        )}
 
         <Link to="/near-you" className="font-body inline-block mt-8 text-sm font-semibold" style={{ color: "color-mix(in srgb, var(--foreground) 55%, transparent)" }}>
           browse all shows →
