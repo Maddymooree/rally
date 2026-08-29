@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import { CrowdScene } from "../components/CrowdScene";
-import { CITIES, fetchEventsForCity, type RallyEvent } from "../lib/events";
+import { CITIES, getEventsForCity, type RallyEvent } from "../lib/events";
 
 function EventCard({ event }: { event: RallyEvent }) {
   const params = new URLSearchParams({
@@ -63,22 +63,7 @@ function EventCard({ event }: { event: RallyEvent }) {
 
 function DiscoveryView() {
   const [city, setCity] = useState<string | null>(null);
-  const [events, setEvents] = useState<RallyEvent[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (!city) return;
-    let cancelled = false;
-    setLoading(true);
-    fetchEventsForCity(city).then((result) => {
-      if (cancelled) return;
-      setEvents(result);
-      setLoading(false);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [city]);
+  const events = city ? getEventsForCity(city) : [];
 
   return (
     <div className="anim-slide-up" style={{ paddingTop: "88px" }}>
@@ -119,19 +104,13 @@ function DiscoveryView() {
             </p>
           )}
 
-          {city && loading && (
-            <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
-              loading…
-            </p>
-          )}
-
-          {city && !loading && events.length === 0 && (
+          {city && events.length === 0 && (
             <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
               nothing confirmed in {CITIES.find((c) => c.slug === city)?.name} yet — check back soon.
             </p>
           )}
 
-          {city && !loading && events.length > 0 && (
+          {city && events.length > 0 && (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {events.map((event) => (
                 <EventCard key={event.id} event={event} />

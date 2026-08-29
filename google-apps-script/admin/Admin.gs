@@ -26,6 +26,12 @@ function adminUpdateLiveEvent(id, fields) { return updateLiveEvent(id, fields); 
 function adminHideEvent(id) { return hideEvent(id); }
 function adminUnhideEvent(id) { return unhideEvent(id); }
 
+// Unlike the tryPublish_() calls after approve/hide/unhide/edit (which swallow
+// errors so a publish hiccup never looks like the approve itself failed),
+// this lets errors propagate — it's the explicit "show me if this is broken"
+// button.
+function adminPublishNow() { publishEventsToGithub_(); }
+
 function adminRunSearchNow() { return runSearchJob(); }
 function adminListSearchRuns() { return listSearchRuns(); }
 function adminListCities() { return CITIES; }

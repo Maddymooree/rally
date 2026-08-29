@@ -68,9 +68,19 @@ city later means adding it to this list in both places — no schema change.
 
 ## What the public site sees
 
-`events-api` exposes `GET ?city=<slug>` returning only `status = "approved"`
-rows for that city, shaped exactly like the existing `RallyEvent` type in
-`src/app/lib/events.tsx`:
+**Architecture note:** an earlier version of this had a second, public Apps
+Script project (`events-api/`) that the site fetched from at runtime. That
+project's code is still in this repo for reference but is no longer used —
+Google Workspace's anonymous-access restrictions made it unreliable. The
+current design (below) is simpler and has no public endpoint at all.
+
+`admin/Github.gs` publishes the approved set straight into the site's repo
+as a commit — `src/app/lib/events-data.json` — whenever an event is
+approved, hidden, unhidden, or edited while live. The site imports that file
+as a static build-time asset (`src/app/lib/events.tsx`), same as any other
+data in the codebase. GitHub's own Pages build picks up the commit and
+redeploys automatically, same as any other push. Each row is shaped exactly
+like the `RallyEvent` type:
 
 ```json
 [

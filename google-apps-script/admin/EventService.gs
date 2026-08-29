@@ -154,10 +154,12 @@ function updateLiveEvent(id, fields) {
   row.dedupe_key = dedupeKey_(row.artist, row.venue, row.date);
   row.updated_at = new Date().toISOString();
   updateRow_(TAB_EVENTS, EVENT_COLUMNS, row._row, row);
+  tryPublish_();
 }
 
 function approveEvent(id) {
   setEventStatus_(id, STATUS.APPROVED);
+  tryPublish_();
 }
 
 function rejectEvent(id) {
@@ -168,10 +170,12 @@ function rejectEvent(id) {
 // fix for "I approved this by accident." Reversible via unhideEvent.
 function hideEvent(id) {
   setEventStatus_(id, STATUS.HIDDEN);
+  tryPublish_();
 }
 
 function unhideEvent(id) {
   setEventStatus_(id, STATUS.APPROVED);
+  tryPublish_();
 }
 
 function setEventStatus_(id, status) {

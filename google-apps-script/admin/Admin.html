@@ -165,6 +165,13 @@
 
     <!-- LIVE -->
     <section class="panel" id="panel-live">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="muted">changes here publish to the site automatically. use this if something looks out of sync.</span>
+          <button class="btn ghost" id="publishNowBtn">publish to site now</button>
+        </div>
+        <div class="status-line" id="publishStatus"></div>
+      </div>
       <div id="liveList"></div>
     </section>
 
@@ -363,6 +370,23 @@
     function loadLive() {
       google.script.run.withSuccessHandler(renderLive).adminListManagedEvents();
     }
+
+    $('publishNowBtn').addEventListener('click', function () {
+      var btn = $('publishNowBtn');
+      btn.disabled = true;
+      $('publishStatus').textContent = 'publishing…';
+      google.script.run
+        .withSuccessHandler(function () {
+          btn.disabled = false;
+          $('publishStatus').textContent = 'published — the site will rebuild in a minute or two.';
+        })
+        .withFailureHandler(function (err) {
+          btn.disabled = false;
+          $('publishStatus').textContent = '';
+          alert('publish failed: ' + (err.message || err));
+        })
+        .adminPublishNow();
+    });
 
     function renderLive(events) {
       $('liveCount').textContent = events.length ? '(' + events.length + ')' : '';
