@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { CrowdScene } from "../components/CrowdScene";
-import { CITIES, getEventsForCity, type RallyEvent } from "../lib/events";
+import { CITIES, getEventsForCity, type EventGenre, type RallyEvent } from "../lib/events";
 
 function EventCard({ event }: { event: RallyEvent }) {
   const params = new URLSearchParams({
@@ -63,7 +63,17 @@ function EventCard({ event }: { event: RallyEvent }) {
 
 function DiscoveryView() {
   const [city, setCity] = useState<string | null>(null);
-  const events = city ? getEventsForCity(city) : [];
+  const [genre, setGenre] = useState<EventGenre | null>(null);
+
+  const selectCity = (slug: string) => {
+    setCity(slug);
+    setGenre(null);
+  };
+
+  const allEvents = city ? getEventsForCity(city) : [];
+  const availableGenres = Array.from(new Set(allEvents.flatMap((e) => e.genres)));
+  const events = genre ? allEvents.filter((e) => e.genres.includes(genre)) : allEvents;
+  const cityName = CITIES.find((c) => c.slug === city)?.name;
 
   return (
     <div className="anim-slide-up" style={{ paddingTop: "88px" }}>
@@ -81,11 +91,11 @@ function DiscoveryView() {
 
       <section className="py-16 px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-2.5 mb-14">
+          <div className="flex flex-wrap justify-center gap-2.5 mb-8">
             {CITIES.map((c) => (
               <button
                 key={c.slug}
-                onClick={() => setCity(c.slug)}
+                onClick={() => selectCity(c.slug)}
                 className="font-body text-sm font-semibold px-5 py-2.5 rounded-full transition-all"
                 style={
                   city === c.slug
@@ -98,15 +108,51 @@ function DiscoveryView() {
             ))}
           </div>
 
+          {city && availableGenres.length > 1 && (
+            <div className="flex flex-wrap justify-center gap-2 mb-10">
+              <button
+                onClick={() => setGenre(null)}
+                className="font-body text-xs font-semibold uppercase tracking-wide px-4 py-1.5 rounded-full transition-all"
+                style={
+                  !genre
+                    ? { background: "var(--primary)", color: "var(--primary-foreground)" }
+                    : { background: "transparent", color: "var(--muted-foreground)", border: "1px solid var(--border)" }
+                }
+              >
+                all
+              </button>
+              {availableGenres.map((g) => (
+                <button
+                  key={g}
+                  onClick={() => setGenre(g)}
+                  className="font-body text-xs font-semibold uppercase tracking-wide px-4 py-1.5 rounded-full transition-all"
+                  style={
+                    genre === g
+                      ? { background: "var(--primary)", color: "var(--primary-foreground)" }
+                      : { background: "transparent", color: "var(--muted-foreground)", border: "1px solid var(--border)" }
+                  }
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+          )}
+
           {!city && (
             <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
               pick a city above to see what's coming up.
             </p>
           )}
 
-          {city && events.length === 0 && (
+          {city && allEvents.length === 0 && (
             <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
-              nothing confirmed in {CITIES.find((c) => c.slug === city)?.name} yet — check back soon.
+              nothing confirmed in {cityName} yet — check back soon.
+            </p>
+          )}
+
+          {city && allEvents.length > 0 && events.length === 0 && (
+            <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
+              no {genre} shows in {cityName} right now — try a different genre.
             </p>
           )}
 
