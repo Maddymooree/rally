@@ -47,12 +47,6 @@ export const CITIES: City[] = [
 
 const EVENTS = eventsData as RallyEvent[];
 
-export function getEventsForCity(citySlug: string): RallyEvent[] {
-  return EVENTS.filter((e) => e.city === citySlug && e.status === "approved").sort((a, b) =>
-    a.date.localeCompare(b.date)
-  );
-}
-
 // A range dateLabel (e.g. "oct 15–18, 2026") always uses an en dash — every
 // single-date label comes from formatDateLabel_ in Github.gs, which never
 // produces one. Used to infer festival-style (apply now) vs a single-night
@@ -61,12 +55,41 @@ export function isMultiNightEvent(event: RallyEvent): boolean {
   return event.dateLabel.includes("–");
 }
 
+const MONTH_INDEX: Record<string, number> = {
+  jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+  jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+};
+
+// The last calendar day an event is still happening. `date` only stores the
+// *start* day, so for a multi-night range ("oct 15–18, 2026") this parses
+// the end day out of dateLabel instead — otherwise a 4-night residency would
+// wrongly disappear from the site after night one. Falls back to `date`
+// for single-date events (or if the label doesn't match the expected shape).
+function getEventEndDate(event: RallyEvent): string {
+  const match = event.dateLabel.match(/^([a-z]+) \d+–(\d+), (\d+)$/i);
+  if (!match) return event.date;
+  const [, monthAbbr, endDay, year] = match;
+  const monthIndex = MONTH_INDEX[monthAbbr.toLowerCase()];
+  if (monthIndex === undefined) return event.date;
+  return `${year}-${String(monthIndex + 1).padStart(2, "0")}-${endDay.padStart(2, "0")}`;
+}
+
+function isPastEvent(event: RallyEvent, referenceDate: Date): boolean {
+  const todayStr = referenceDate.toISOString().slice(0, 10);
+  return getEventEndDate(event) < todayStr;
+}
+
+export function getEventsForCity(citySlug: string, referenceDate: Date = new Date()): RallyEvent[] {
+  return EVENTS.filter(
+    (e) => e.city === citySlug && e.status === "approved" && !isPastEvent(e, referenceDate)
+  ).sort((a, b) => a.date.localeCompare(b.date));
+}
+
 // The soonest `limit` approved events across every near-you city, for the
 // homepage's "happening soon" carousel. Re-run against the current date on
 // every page load/rebuild — there's no separate "refresh" step needed.
 export function getUpcomingEvents(limit: number, referenceDate: Date = new Date()): RallyEvent[] {
-  const todayStr = referenceDate.toISOString().slice(0, 10);
-  const upcoming = EVENTS.filter((e) => e.status === "approved" && e.date >= todayStr);
+  const upcoming = EVENTS.filter((e) => e.status === "approved" && !isPastEvent(e, referenceDate));
 
   upcoming.sort((a, b) => {
     if (a.date !== b.date) return a.date.localeCompare(b.date);
