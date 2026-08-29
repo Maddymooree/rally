@@ -24,6 +24,20 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
+    slug: "iii points",
+    name: "iii points",
+    dates: "oct 16–17, 2026",
+    city: "miami, fl",
+    status: "open",
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size * 0.87} viewBox="0 0 30 26" fill="none" stroke={stroke} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 22 L8 10 L12 22" />
+        <path d="M11 22 L15 4 L19 22" />
+        <path d="M18 22 L22 13 L26 22" />
+      </svg>
+    ),
+  },
+  {
     slug: "coachella",
     name: "coachella",
     dates: "apr 9–11 & 16–18, 2027",
