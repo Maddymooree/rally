@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "prospa-silo-dallas-2026-10-10",
+    "artist": "prospa",
+    "venue": "silo dallas",
+    "city": "dallas",
+    "date": "2026-10-10",
+    "dateLabel": "oct 10, 2026",
+    "genres": ["house", "dj set"],
+    "imageUrl": null,
+    "ticketUrl": null,
+    "featured": false,
+    "status": "approved",
+    "source": "manual",
+    "sourceId": "prospa-silo-dallas-2026-10-10"
+  }
+]
