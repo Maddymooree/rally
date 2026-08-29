@@ -169,6 +169,21 @@ export function GlobalStyles() {
         -ms-overflow-style: none;
       }
       .up-next-track::-webkit-scrollbar { display: none; }
+      /* On narrow screens only one card fits at a time, so snap it to the
+         center of the viewport instead of flush against the left edge.
+         Desktop keeps the edge-aligned multi-card layout — centering
+         doesn't apply once several cards are visible at once. Padding on
+         each side is set to leave exactly half a card's width of room, so
+         the browser can scroll the first/last cards all the way to center. */
+      @media (max-width: 640px) {
+        .up-next-track {
+          padding-left: calc(50% - 155px) !important;
+          padding-right: calc(50% - 155px) !important;
+        }
+        .up-next-card {
+          scroll-snap-align: center !important;
+        }
+      }
 
       /* ── nav mobile dropdown ── */
       .nav-menu-btn { display: none; }
