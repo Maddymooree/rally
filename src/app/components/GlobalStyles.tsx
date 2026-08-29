@@ -163,6 +163,13 @@ export function GlobalStyles() {
         .crowd-scattered { animation-duration: 0.01s; }
       }
 
+      /* ── homepage: "happening soon" carousel ── */
+      .up-next-track {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .up-next-track::-webkit-scrollbar { display: none; }
+
       /* ── nav mobile dropdown ── */
       .nav-menu-btn { display: none; }
       .nav-dropdown { display: none; }

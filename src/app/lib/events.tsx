@@ -61,13 +61,12 @@ export function isMultiNightEvent(event: RallyEvent): boolean {
   return event.dateLabel.includes("–");
 }
 
-// The soonest approved event across every near-you city, for the homepage's
-// "up next" card. Re-run against the current date on every page load /
-// rebuild — there's no separate "refresh" step needed.
-export function getNextUpcomingEvent(referenceDate: Date = new Date()): RallyEvent | null {
+// The soonest `limit` approved events across every near-you city, for the
+// homepage's "happening soon" carousel. Re-run against the current date on
+// every page load/rebuild — there's no separate "refresh" step needed.
+export function getUpcomingEvents(limit: number, referenceDate: Date = new Date()): RallyEvent[] {
   const todayStr = referenceDate.toISOString().slice(0, 10);
   const upcoming = EVENTS.filter((e) => e.status === "approved" && e.date >= todayStr);
-  if (upcoming.length === 0) return null;
 
   upcoming.sort((a, b) => {
     if (a.date !== b.date) return a.date.localeCompare(b.date);
@@ -75,5 +74,5 @@ export function getNextUpcomingEvent(referenceDate: Date = new Date()): RallyEve
     return a.artist.localeCompare(b.artist);
   });
 
-  return upcoming[0];
+  return upcoming.slice(0, limit);
 }
