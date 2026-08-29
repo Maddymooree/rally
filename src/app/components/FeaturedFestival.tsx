@@ -15,7 +15,6 @@ function UpNextCard({ event }: { event: RallyEvent }) {
   const cityName = CITIES.find((c) => c.slug === event.city)?.name ?? event.city;
   const multiNight = isMultiNightEvent(event);
   const ctaLabel = multiNight ? "apply now →" : "find your crew →";
-  const badgeLabel = multiNight ? "● applications open" : "● find your crew";
   const params = new URLSearchParams({
     festival: "other",
     event: `${event.artist} @ ${event.venue}`,
@@ -36,12 +35,17 @@ function UpNextCard({ event }: { event: RallyEvent }) {
         <svg width={30} height={30 * 0.87} viewBox="0 0 30 26" fill="none" stroke="var(--primary)" strokeWidth="1.8">
           <path d="M4 22 L15 4 L26 22 Z" />
         </svg>
-        <span
-          className="font-body text-[11px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
-          style={{ background: "color-mix(in srgb, var(--primary) 16%, transparent)", color: "var(--primary)" }}
-        >
-          {badgeLabel}
-        </span>
+        <div className="flex gap-1.5 flex-wrap justify-end">
+          {event.genres.slice(0, 2).map((g) => (
+            <span
+              key={g}
+              className="font-body text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap"
+              style={{ background: "color-mix(in srgb, var(--primary) 18%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)" }}
+            >
+              {g}
+            </span>
+          ))}
+        </div>
       </div>
       <h3
         className="font-display font-black text-xl text-white mb-1 text-left lowercase"
