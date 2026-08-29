@@ -21,7 +21,15 @@ function readRows_(tabName, columns) {
   return values
     .map(function (row, i) {
       var obj = { _row: i + 2 };
-      columns.forEach(function (col, idx) { obj[col] = row[idx]; });
+      // Sheets auto-converts plain "YYYY-MM-DD" strings (e.g. our `date`
+      // column) into real Date-typed cells on write. google.script.run can't
+      // serialize a Date in its return value — it silently comes back as
+      // null on the client instead of throwing — so normalize back to a
+      // plain string here, at the read boundary, before it goes anywhere.
+      columns.forEach(function (col, idx) {
+        var v = row[idx];
+        obj[col] = v instanceof Date ? Utilities.formatDate(v, 'UTC', 'yyyy-MM-dd') : v;
+      });
       return obj;
     })
     // A row is "empty" once every mapped cell is blank — skip it rather than

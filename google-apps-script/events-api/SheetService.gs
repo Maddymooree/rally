@@ -19,7 +19,13 @@ function readRows_(tabName, columns) {
   return values
     .map(function (row) {
       var obj = {};
-      columns.forEach(function (col, idx) { obj[col] = row[idx]; });
+      // Sheets auto-converts plain "YYYY-MM-DD" strings (our `date` column)
+      // into real Date-typed cells on write — normalize back to a plain
+      // string here so downstream JSON output is always a consistent type.
+      columns.forEach(function (col, idx) {
+        var v = row[idx];
+        obj[col] = v instanceof Date ? Utilities.formatDate(v, 'UTC', 'yyyy-MM-dd') : v;
+      });
       return obj;
     })
     .filter(function (obj) {
