@@ -1,5 +1,35 @@
 [
   {
+    "id": "prospa-shrine-expo-hall-2026-10-14",
+    "artist": "prospa",
+    "venue": "shrine expo hall",
+    "city": "los-angeles",
+    "date": "2026-10-14",
+    "dateLabel": "oct 14–16, 2026",
+    "genres": ["house", "techno"],
+    "imageUrl": null,
+    "ticketUrl": null,
+    "featured": false,
+    "status": "approved",
+    "source": "manual",
+    "sourceId": "prospa-shrine-expo-hall-2026-10-14"
+  },
+  {
+    "id": "two-friends-hollywood-palladium-2026-10-24",
+    "artist": "two friends",
+    "venue": "hollywood palladium",
+    "city": "los-angeles",
+    "date": "2026-10-24",
+    "dateLabel": "oct 24, 2026",
+    "genres": ["edm", "dance"],
+    "imageUrl": null,
+    "ticketUrl": null,
+    "featured": false,
+    "status": "approved",
+    "source": "manual",
+    "sourceId": "two-friends-hollywood-palladium-2026-10-24"
+  },
+  {
     "id": "silva-bumpa-sound-nightclub-2026-09-11",
     "artist": "silva bumpa",
     "venue": "sound nightclub",
