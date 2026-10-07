@@ -11,7 +11,7 @@ const CREW_AVATARS = [
 ];
 
 const CHAT_MESSAGES = [
-  { from: "JK", text: "who driving to austin?", self: false },
+  { from: "JK", text: "who driving to indio?", self: false },
   { from: "MP", text: "me!! room for 2 more", self: false },
   { from: "SA", text: "wait this crew is actually sick", self: false },
   { from: "EL", text: "lol rally always delivers", self: false },
@@ -33,15 +33,15 @@ function SearchScreen() {
       <p className="font-display font-black text-xl mb-3" style={{ color: "var(--foreground)" }}>where are you going?</p>
       <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl mb-4" style={{ background: "var(--secondary)", border: "1px solid var(--border)" }}>
         <span style={{ color: "color-mix(in srgb,var(--foreground) 28%,transparent)", fontSize: "12px" }}>⌕</span>
-        <span className="font-body text-sm" style={{ color: "color-mix(in srgb,var(--foreground) 38%,transparent)" }}>austin city limits</span>
+        <span className="font-body text-sm" style={{ color: "color-mix(in srgb,var(--foreground) 38%,transparent)" }}>coachella</span>
         <span className="ml-auto w-px h-3.5 animate-pulse" style={{ background: "var(--primary)" }} />
       </div>
       <div className="p-3.5 rounded-xl" style={{ background: "color-mix(in srgb, var(--primary) 8%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)" }}>
         <div className="flex items-center justify-between mb-1.5">
-          <span className="font-display font-black text-sm" style={{ color: "var(--foreground)" }}>austin city limits</span>
+          <span className="font-display font-black text-sm" style={{ color: "var(--foreground)" }}>coachella</span>
           <span className="font-body text-[11px] font-bold px-1.5 py-0.5 rounded-full" style={{ background: "color-mix(in srgb, var(--primary) 18%, transparent)", color: "var(--primary)" }}>open</span>
         </div>
-        <p className="font-body text-xs" style={{ color: "var(--muted-foreground)" }}>oct 2–4 & 9–11 · austin, tx</p>
+        <p className="font-body text-xs" style={{ color: "var(--muted-foreground)" }}>apr 9–11 & 16–18, 2027 · indio, ca</p>
         <div className="relative mt-3">
           <button
             className="font-body w-full py-1.5 rounded-lg text-xs font-bold relative"
@@ -161,7 +161,7 @@ function ChatScreen({ runKey }: { runKey: number }) {
             <div key={i} className="w-5 h-5 rounded-full border flex items-center justify-center text-[8px] font-bold text-white font-body" style={{ background: a.bg, borderColor: "var(--background)" }}>{a.initials[0]}</div>
           ))}
         </div>
-        <p className="font-display font-black text-[11px]" style={{ color: "var(--foreground)" }}>acl crew</p>
+        <p className="font-display font-black text-[11px]" style={{ color: "var(--foreground)" }}>coachella crew</p>
         <span className="ml-auto font-body text-[10px] font-semibold" style={{ color: "var(--primary)" }}>5 ppl</span>
       </div>
       <div className="flex-1 flex flex-col gap-1.5 overflow-hidden">

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Mascot } from "./Mascot";
 
-const ACL_DATE = new Date("2026-10-02T00:00:00");
+const ACL_DATE = new Date("2026-10-16T00:00:00");
 // Update as applications come in.
 const ACL_APPLICANT_COUNT = 0;
 
@@ -26,13 +26,13 @@ export function AclBanner() {
       style={{ background: "color-mix(in srgb, var(--primary) 6%, transparent)", borderBottom: "1px solid var(--border)" }}
     >
       <button
-        onClick={() => navigate("/apply?festival=austin%20city%20limits")}
+        onClick={() => navigate("/apply?festival=iii%20points")}
         className="w-full flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-6 py-3 text-center cursor-pointer transition-colors hover:bg-white/[0.02]"
       >
         <span className="flex items-center gap-2">
           <Mascot size={15} color="var(--primary)" />
           <span className="font-body text-xs font-semibold" style={{ color: "var(--foreground)" }}>
-            austin city limits is next — {label || "counting down"}
+            iii points is next — {label || "counting down"}
             {ACL_APPLICANT_COUNT > 0 && (
               <span style={{ color: "var(--muted-foreground)" }}>
                 {" "}
@@ -42,7 +42,7 @@ export function AclBanner() {
           </span>
         </span>
         <span className="font-body text-xs font-bold" style={{ color: "var(--primary)" }}>
-          apply for ACL →
+          apply for iii points →
         </span>
       </button>
     </div>
