@@ -6,10 +6,7 @@
     "city": "new-york",
     "date": "2026-09-03",
     "dateLabel": "sep 3, 2026",
-    "genres": [
-      "edm",
-      "house"
-    ],
+    "genres": ["edm", "house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -24,10 +21,7 @@
     "city": "new-york",
     "date": "2026-09-04",
     "dateLabel": "sep 4, 2026",
-    "genres": [
-      "house",
-      "dance"
-    ],
+    "genres": ["house", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -42,10 +36,7 @@
     "city": "new-york",
     "date": "2026-09-06",
     "dateLabel": "sep 6, 2026",
-    "genres": [
-      "house",
-      "electronic"
-    ],
+    "genres": ["house", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -60,10 +51,7 @@
     "city": "new-york",
     "date": "2026-09-11",
     "dateLabel": "sep 11, 2026",
-    "genres": [
-      "house",
-      "electronic"
-    ],
+    "genres": ["house", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -78,10 +66,7 @@
     "city": "new-york",
     "date": "2026-09-12",
     "dateLabel": "sep 12, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -96,9 +81,7 @@
     "city": "new-york",
     "date": "2026-09-25",
     "dateLabel": "sep 25, 2026",
-    "genres": [
-      "techno"
-    ],
+    "genres": ["techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -113,10 +96,7 @@
     "city": "new-york",
     "date": "2026-09-26",
     "dateLabel": "sep 26, 2026",
-    "genres": [
-      "house",
-      "electronic"
-    ],
+    "genres": ["house", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -131,10 +111,7 @@
     "city": "new-york",
     "date": "2026-10-02",
     "dateLabel": "oct 2, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -149,10 +126,7 @@
     "city": "new-york",
     "date": "2026-10-23",
     "dateLabel": "oct 23\u201324, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -167,10 +141,7 @@
     "city": "new-york",
     "date": "2026-10-30",
     "dateLabel": "oct 30\u201331, 2026",
-    "genres": [
-      "house",
-      "techno"
-    ],
+    "genres": ["house", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -185,9 +156,7 @@
     "city": "new-york",
     "date": "2026-11-28",
     "dateLabel": "nov 28, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": true,
@@ -202,10 +171,7 @@
     "city": "miami",
     "date": "2026-09-04",
     "dateLabel": "sep 4, 2026",
-    "genres": [
-      "edm",
-      "dance"
-    ],
+    "genres": ["edm", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -220,10 +186,7 @@
     "city": "miami",
     "date": "2026-09-05",
     "dateLabel": "sep 5, 2026",
-    "genres": [
-      "house",
-      "techno"
-    ],
+    "genres": ["house", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -238,9 +201,7 @@
     "city": "miami",
     "date": "2026-09-06",
     "dateLabel": "sep 6, 2026",
-    "genres": [
-      "techno"
-    ],
+    "genres": ["techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -255,10 +216,7 @@
     "city": "miami",
     "date": "2026-09-16",
     "dateLabel": "sep 16, 2026",
-    "genres": [
-      "electronic",
-      "dance"
-    ],
+    "genres": ["electronic", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -273,10 +231,7 @@
     "city": "miami",
     "date": "2026-09-18",
     "dateLabel": "sep 18, 2026",
-    "genres": [
-      "edm",
-      "house"
-    ],
+    "genres": ["edm", "house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -291,9 +246,7 @@
     "city": "miami",
     "date": "2026-09-19",
     "dateLabel": "sep 19, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -308,10 +261,7 @@
     "city": "miami",
     "date": "2026-09-26",
     "dateLabel": "sep 26, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -326,10 +276,7 @@
     "city": "miami",
     "date": "2026-10-15",
     "dateLabel": "oct 15, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -344,10 +291,7 @@
     "city": "miami",
     "date": "2026-10-17",
     "dateLabel": "oct 17, 2026",
-    "genres": [
-      "house",
-      "electronic"
-    ],
+    "genres": ["house", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -362,10 +306,7 @@
     "city": "los-angeles",
     "date": "2026-10-14",
     "dateLabel": "oct 14\u201316, 2026",
-    "genres": [
-      "house",
-      "techno"
-    ],
+    "genres": ["house", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -380,10 +321,7 @@
     "city": "los-angeles",
     "date": "2026-10-24",
     "dateLabel": "oct 24, 2026",
-    "genres": [
-      "edm",
-      "dance"
-    ],
+    "genres": ["edm", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -398,9 +336,7 @@
     "city": "los-angeles",
     "date": "2026-09-11",
     "dateLabel": "sep 11, 2026",
-    "genres": [
-      "techno"
-    ],
+    "genres": ["techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -415,10 +351,7 @@
     "city": "los-angeles",
     "date": "2026-09-19",
     "dateLabel": "sep 19, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -433,10 +366,7 @@
     "city": "los-angeles",
     "date": "2026-09-25",
     "dateLabel": "sep 25, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -451,9 +381,7 @@
     "city": "los-angeles",
     "date": "2026-09-27",
     "dateLabel": "sep 27, 2026",
-    "genres": [
-      "dj set"
-    ],
+    "genres": ["dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -468,10 +396,7 @@
     "city": "los-angeles",
     "date": "2026-10-01",
     "dateLabel": "oct 1, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -486,10 +411,7 @@
     "city": "los-angeles",
     "date": "2026-10-02",
     "dateLabel": "oct 2\u20133, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -504,10 +426,7 @@
     "city": "los-angeles",
     "date": "2026-10-03",
     "dateLabel": "oct 3, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -522,9 +441,7 @@
     "city": "los-angeles",
     "date": "2026-10-07",
     "dateLabel": "oct 7, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -539,10 +456,7 @@
     "city": "los-angeles",
     "date": "2026-10-17",
     "dateLabel": "oct 17, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -557,9 +471,7 @@
     "city": "los-angeles",
     "date": "2026-10-18",
     "dateLabel": "oct 18, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -574,10 +486,7 @@
     "city": "los-angeles",
     "date": "2026-10-30",
     "dateLabel": "oct 30, 2026",
-    "genres": [
-      "house",
-      "dance"
-    ],
+    "genres": ["house", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -592,9 +501,7 @@
     "city": "chicago",
     "date": "2026-09-13",
     "dateLabel": "sep 13, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -609,10 +516,7 @@
     "city": "dallas",
     "date": "2026-10-10",
     "dateLabel": "oct 10, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -642,9 +546,7 @@
     "city": "dallas",
     "date": "2026-09-04",
     "dateLabel": "sep 4, 2026",
-    "genres": [
-      "techno"
-    ],
+    "genres": ["techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -659,10 +561,7 @@
     "city": "dallas",
     "date": "2026-09-06",
     "dateLabel": "sep 6, 2026",
-    "genres": [
-      "edm",
-      "dance"
-    ],
+    "genres": ["edm", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -677,10 +576,7 @@
     "city": "dallas",
     "date": "2026-10-16",
     "dateLabel": "oct 16, 2026",
-    "genres": [
-      "edm",
-      "electronic"
-    ],
+    "genres": ["edm", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -695,10 +591,7 @@
     "city": "dallas",
     "date": "2026-10-17",
     "dateLabel": "oct 17, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -713,10 +606,7 @@
     "city": "dallas",
     "date": "2026-10-23",
     "dateLabel": "oct 23, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -731,10 +621,7 @@
     "city": "dallas",
     "date": "2026-11-20",
     "dateLabel": "nov 20, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -749,10 +636,7 @@
     "city": "dallas",
     "date": "2026-12-04",
     "dateLabel": "dec 4, 2026",
-    "genres": [
-      "edm",
-      "electronic"
-    ],
+    "genres": ["edm", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -767,9 +651,7 @@
     "city": "chicago",
     "date": "2026-09-12",
     "dateLabel": "sep 12, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -784,9 +666,7 @@
     "city": "chicago",
     "date": "2026-09-03",
     "dateLabel": "sep 3, 2026",
-    "genres": [
-      "techno"
-    ],
+    "genres": ["techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -801,10 +681,7 @@
     "city": "chicago",
     "date": "2026-09-04",
     "dateLabel": "sep 4, 2026",
-    "genres": [
-      "house",
-      "dance"
-    ],
+    "genres": ["house", "dance"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -819,10 +696,7 @@
     "city": "chicago",
     "date": "2026-09-04",
     "dateLabel": "sep 4, 2026",
-    "genres": [
-      "electronic",
-      "dj set"
-    ],
+    "genres": ["electronic", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -837,10 +711,7 @@
     "city": "chicago",
     "date": "2026-09-05",
     "dateLabel": "sep 5, 2026",
-    "genres": [
-      "house",
-      "dj set"
-    ],
+    "genres": ["house", "dj set"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -855,9 +726,7 @@
     "city": "chicago",
     "date": "2026-09-05",
     "dateLabel": "sep 5, 2026",
-    "genres": [
-      "techno"
-    ],
+    "genres": ["techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -872,10 +741,7 @@
     "city": "chicago",
     "date": "2026-09-06",
     "dateLabel": "sep 6, 2026",
-    "genres": [
-      "techno",
-      "electronic"
-    ],
+    "genres": ["techno", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -890,10 +756,7 @@
     "city": "chicago",
     "date": "2026-09-07",
     "dateLabel": "sep 7, 2026",
-    "genres": [
-      "electronic",
-      "techno"
-    ],
+    "genres": ["electronic", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -908,9 +771,7 @@
     "city": "chicago",
     "date": "2026-10-15",
     "dateLabel": "oct 15\u201318, 2026",
-    "genres": [
-      "electronic"
-    ],
+    "genres": ["electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -925,10 +786,7 @@
     "city": "chicago",
     "date": "2026-10-17",
     "dateLabel": "oct 17, 2026",
-    "genres": [
-      "house",
-      "electronic"
-    ],
+    "genres": ["house", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -943,9 +801,7 @@
     "city": "chicago",
     "date": "2026-10-30",
     "dateLabel": "oct 30\u201331, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -960,9 +816,7 @@
     "city": "chicago",
     "date": "2026-11-13",
     "dateLabel": "nov 13, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -977,9 +831,7 @@
     "city": "chicago",
     "date": "2026-11-24",
     "dateLabel": "nov 24\u201325, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": true,
@@ -994,10 +846,7 @@
     "city": "chicago",
     "date": "2026-11-20",
     "dateLabel": "nov 20, 2026",
-    "genres": [
-      "house",
-      "techno"
-    ],
+    "genres": ["house", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -1012,9 +861,7 @@
     "city": "chicago",
     "date": "2026-11-27",
     "dateLabel": "nov 27, 2026",
-    "genres": [
-      "house"
-    ],
+    "genres": ["house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -1029,10 +876,7 @@
     "city": "miami",
     "date": "2026-10-30",
     "dateLabel": "oct 30\u2013nov 1, 2026",
-    "genres": [
-      "techno",
-      "house"
-    ],
+    "genres": ["techno", "house"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -1047,10 +891,7 @@
     "city": "miami",
     "date": "2026-12-01",
     "dateLabel": "dec 1, 2026",
-    "genres": [
-      "house",
-      "techno"
-    ],
+    "genres": ["house", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -1065,10 +906,7 @@
     "city": "miami",
     "date": "2026-12-02",
     "dateLabel": "dec 2, 2026",
-    "genres": [
-      "house",
-      "electronic"
-    ],
+    "genres": ["house", "electronic"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
@@ -1083,10 +921,7 @@
     "city": "miami",
     "date": "2026-12-05",
     "dateLabel": "dec 5, 2026",
-    "genres": [
-      "house",
-      "techno"
-    ],
+    "genres": ["house", "techno"],
     "imageUrl": null,
     "ticketUrl": null,
     "featured": false,
