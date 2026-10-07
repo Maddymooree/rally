@@ -63,13 +63,15 @@ const MONTH_INDEX: Record<string, number> = {
 // The last calendar day an event is still happening. `date` only stores the
 // *start* day, so for a multi-night range ("oct 15–18, 2026") this parses
 // the end day out of dateLabel instead — otherwise a 4-night residency would
-// wrongly disappear from the site after night one. Falls back to `date`
-// for single-date events (or if the label doesn't match the expected shape).
+// wrongly disappear from the site after night one. Also handles a range that
+// crosses a month boundary ("oct 30–nov 1, 2026"), where the end month
+// differs from the start month. Falls back to `date` for single-date events
+// (or if the label doesn't match either shape).
 function getEventEndDate(event: RallyEvent): string {
-  const match = event.dateLabel.match(/^([a-z]+) \d+–(\d+), (\d+)$/i);
+  const match = event.dateLabel.match(/^([a-z]+) \d+–(?:([a-z]+) )?(\d+), (\d+)$/i);
   if (!match) return event.date;
-  const [, monthAbbr, endDay, year] = match;
-  const monthIndex = MONTH_INDEX[monthAbbr.toLowerCase()];
+  const [, startMonthAbbr, endMonthAbbr, endDay, year] = match;
+  const monthIndex = MONTH_INDEX[(endMonthAbbr ?? startMonthAbbr).toLowerCase()];
   if (monthIndex === undefined) return event.date;
   return `${year}-${String(monthIndex + 1).padStart(2, "0")}-${endDay.padStart(2, "0")}`;
 }
