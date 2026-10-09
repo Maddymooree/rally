@@ -26,6 +26,18 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
+    slug: "edc orlando",
+    name: "edc orlando",
+    dates: "nov 6–8, 2026",
+    city: "orlando, fl",
+    status: "open",
+    icon: ({ size = 26 }) => (
+      <svg width={size * 0.86} height={size} viewBox="0 0 24 28" fill="none" stroke={stroke} strokeWidth="1.8">
+        <path d="M13 1 L4 16 h6 l-3 11 12-17 h-6 Z" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
     slug: "coachella",
     name: "coachella",
     dates: "apr 9–11 & 16–18, 2027",
