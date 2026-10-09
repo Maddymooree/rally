@@ -885,36 +885,6 @@
     "sourceId": "hocus-pocus-factory-town-miami-2026-10-30"
   },
   {
-    "id": "prospa-prophecy-club-space-miami-2026-12-01",
-    "artist": "prospa presents prophecy (space basel)",
-    "venue": "club space",
-    "city": "miami",
-    "date": "2026-12-01",
-    "dateLabel": "dec 1, 2026",
-    "genres": ["house", "techno"],
-    "imageUrl": null,
-    "ticketUrl": null,
-    "featured": false,
-    "status": "approved",
-    "source": "manual",
-    "sourceId": "prospa-prophecy-club-space-miami-2026-12-01"
-  },
-  {
-    "id": "beltran-beltools-club-space-miami-2026-12-02",
-    "artist": "beltran presents beltools (space basel)",
-    "venue": "club space",
-    "city": "miami",
-    "date": "2026-12-02",
-    "dateLabel": "dec 2, 2026",
-    "genres": ["house", "electronic"],
-    "imageUrl": null,
-    "ticketUrl": null,
-    "featured": false,
-    "status": "approved",
-    "source": "manual",
-    "sourceId": "beltran-beltools-club-space-miami-2026-12-02"
-  },
-  {
     "id": "circoloco-miami-factory-town-miami-2026-12-05",
     "artist": "circoloco miami",
     "venue": "factory town",
