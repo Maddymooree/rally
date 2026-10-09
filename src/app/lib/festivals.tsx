@@ -12,18 +12,6 @@ const stroke = "var(--primary)";
 
 export const FESTIVALS: Festival[] = [
   {
-    slug: "austin city limits",
-    name: "austin city limits",
-    dates: "oct 2–4 & 9–11",
-    city: "austin, tx",
-    status: "open",
-    icon: ({ size = 26 }) => (
-      <svg width={size} height={size * 0.87} viewBox="0 0 30 26" fill="none" stroke={stroke} strokeWidth="1.8">
-        <path d="M4 22 L15 4 L26 22 Z" />
-      </svg>
-    ),
-  },
-  {
     slug: "iii points",
     name: "iii points",
     dates: "oct 16–17, 2026",
