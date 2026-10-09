@@ -51,8 +51,8 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
-    slug: "edc",
-    name: "edc",
+    slug: "edc las vegas",
+    name: "edc las vegas",
     dates: "may 14–16 & 21–23, 2027",
     city: "las vegas, nv",
     status: null,
