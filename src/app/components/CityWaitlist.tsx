@@ -24,7 +24,7 @@ export function CityWaitlist({ cityName }: { cityName: string }) {
 
     submitWaitlist({ firstName: form.firstName, email: form.email, instagram: form.instagram, city: cityName })
       .then(() => {
-        setStatus({ kind: "success", message: "you're on the list 💙 we'll let you know when it's time to rally." });
+        setStatus({ kind: "success", message: "you're on the list. we'll let you know when it's time to rally." });
         setForm({ firstName: "", email: "", instagram: "" });
       })
       .catch(() => {
