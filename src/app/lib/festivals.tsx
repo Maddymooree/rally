@@ -3,6 +3,11 @@ export interface Festival {
   name: string;
   sub?: string;
   dates: string;
+  // ISO start/end dates, used only to auto-pick the "next" open festival for
+  // the homepage banner (sorting/filtering "dates tba" display strings isn't
+  // reliable). Omitted for festivals without confirmed dates yet.
+  startDate?: string;
+  endDate?: string;
   city: string;
   status: "open" | null;
   icon: (props: { size?: number }) => React.ReactNode;
@@ -15,6 +20,8 @@ export const FESTIVALS: Festival[] = [
     slug: "iii points",
     name: "iii points",
     dates: "oct 16–17, 2026",
+    startDate: "2026-10-16",
+    endDate: "2026-10-17",
     city: "miami, fl",
     status: "open",
     icon: ({ size = 26 }) => (
@@ -29,6 +36,8 @@ export const FESTIVALS: Festival[] = [
     slug: "edc orlando",
     name: "edc orlando",
     dates: "nov 6–8, 2026",
+    startDate: "2026-11-06",
+    endDate: "2026-11-08",
     city: "orlando, fl",
     status: "open",
     icon: ({ size = 26 }) => (
@@ -41,6 +50,8 @@ export const FESTIVALS: Festival[] = [
     slug: "coachella",
     name: "coachella",
     dates: "apr 9–11 & 16–18, 2027",
+    startDate: "2027-04-09",
+    endDate: "2027-04-18",
     city: "indio, ca",
     status: null,
     icon: ({ size = 26 }) => (
@@ -54,6 +65,8 @@ export const FESTIVALS: Festival[] = [
     slug: "edc las vegas",
     name: "edc las vegas",
     dates: "may 14–16 & 21–23, 2027",
+    startDate: "2027-05-14",
+    endDate: "2027-05-23",
     city: "las vegas, nv",
     status: null,
     icon: ({ size = 26 }) => (
@@ -67,6 +80,8 @@ export const FESTIVALS: Festival[] = [
     name: "tomorrowland",
     sub: "weekend 1",
     dates: "jul 17–19, 2027",
+    startDate: "2027-07-17",
+    endDate: "2027-07-19",
     city: "boom, belgium",
     status: null,
     icon: ({ size = 26 }) => (
@@ -79,6 +94,8 @@ export const FESTIVALS: Festival[] = [
     slug: "ultra",
     name: "ultra",
     dates: "mar 26–28, 2027",
+    startDate: "2027-03-26",
+    endDate: "2027-03-28",
     city: "miami, fl",
     status: null,
     icon: ({ size = 26 }) => (

@@ -1,5 +1,5 @@
 import { Hero } from "../components/Hero";
-import { AclBanner } from "../components/AclBanner";
+import { FestivalBanner } from "../components/FestivalBanner";
 import { Ticker } from "../components/Ticker";
 import { NotDatingApp } from "../components/NotDatingApp";
 import { PhoneDemo } from "../components/PhoneDemo";
@@ -10,7 +10,7 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <AclBanner />
+      <FestivalBanner />
       <Ticker />
       <NotDatingApp />
       <PhoneDemo />
