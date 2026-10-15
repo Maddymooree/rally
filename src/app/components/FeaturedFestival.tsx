@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { CITIES, getUpcomingEvents, isMultiNightEvent, type RallyEvent } from "../lib/events";
+import { CITIES, getEventsForCity, isMultiNightEvent, type RallyEvent } from "../lib/events";
+import { FESTIVALS, type Festival } from "../lib/festivals";
 
 // The set is rendered 3x back to back and the scroll position starts in the
 // middle copy, so there's always more track to scroll into in either
@@ -10,6 +11,60 @@ import { CITIES, getUpcomingEvents, isMultiNightEvent, type RallyEvent } from ".
 // is imperceptible since it's an exact duplicate of what's already there,
 // which is what makes the loop read as continuous instead of dead-ending.
 const LOOP_COPIES = 3;
+
+type Card = { kind: "festival"; data: Festival } | { kind: "event"; data: RallyEvent };
+
+function cardKey(card: Card): string {
+  return card.kind === "festival" ? `festival-${card.data.slug}` : `event-${card.data.id}`;
+}
+
+function UpNextFestivalCard({ festival }: { festival: Festival }) {
+  return (
+    <div
+      className="up-next-card shrink-0 p-7 rounded-2xl"
+      style={{
+        width: "310px",
+        scrollSnapAlign: "start",
+        background: "color-mix(in srgb, var(--primary) 6%, transparent)",
+        border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)",
+      }}
+    >
+      <div className="flex items-start justify-between mb-4">
+        {festival.icon({ size: 30 })}
+        <span
+          className="font-body text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap"
+          style={{ background: "color-mix(in srgb, var(--primary) 18%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)" }}
+        >
+          festival
+        </span>
+      </div>
+      <h3
+        className="font-display font-black text-xl text-white mb-1 text-left lowercase"
+        title={festival.name}
+        style={{
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          minHeight: "3.5rem",
+        }}
+      >
+        {festival.name}
+        {festival.sub ? ` — ${festival.sub}` : ""}
+      </h3>
+      <p className="font-body text-sm text-left mb-6" style={{ color: "var(--muted-foreground)" }}>
+        {festival.dates} · {festival.city}
+      </p>
+      <Link
+        to={`/apply?festival=${encodeURIComponent(festival.slug)}`}
+        className="font-body block w-full py-3 rounded-lg text-sm font-bold text-center transition-all hover:opacity-90"
+        style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
+      >
+        apply now →
+      </Link>
+    </div>
+  );
+}
 
 function UpNextCard({ event }: { event: RallyEvent }) {
   const cityName = CITIES.find((c) => c.slug === event.city)?.name ?? event.city;
@@ -74,19 +129,39 @@ function UpNextCard({ event }: { event: RallyEvent }) {
   );
 }
 
+// Festivals with applications currently open (soonest first), followed by
+// Miami's upcoming shows — the only active near-you city. Deliberately
+// excludes events from coming-soon cities (Dallas/NYC/LA/Chicago), since
+// matching hasn't launched there yet and this carousel's CTA is a live
+// apply link.
+function useFeaturedCards(): Card[] {
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const openFestivals = FESTIVALS.filter((f) => f.status === "open" && f.startDate && (!f.endDate || f.endDate >= todayStr)).sort(
+    (a, b) => a.startDate!.localeCompare(b.startDate!)
+  );
+  const miamiEvents = getEventsForCity("miami");
+
+  const cards: Card[] = [
+    ...openFestivals.map((f): Card => ({ kind: "festival", data: f })),
+    ...miamiEvents.map((e): Card => ({ kind: "event", data: e })),
+  ];
+
+  return cards.slice(0, 10);
+}
+
 export function FeaturedFestival() {
-  const events = getUpcomingEvents(10);
+  const cards = useFeaturedCards();
   const trackRef = useRef<HTMLDivElement>(null);
   const settleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const loop = events.length > 1;
+  const loop = cards.length > 1;
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track || !loop) return;
     track.scrollLeft = track.scrollWidth / LOOP_COPIES;
-  }, [loop, events.length]);
+  }, [loop, cards.length]);
 
-  if (events.length === 0) return null;
+  if (cards.length === 0) return null;
 
   const recenter = () => {
     const track = trackRef.current;
@@ -109,11 +184,12 @@ export function FeaturedFestival() {
     trackRef.current?.scrollBy({ left: dir * 330, behavior: "smooth" });
   };
 
+  const renderCard = (card: Card, key: string) =>
+    card.kind === "festival" ? <UpNextFestivalCard key={key} festival={card.data} /> : <UpNextCard key={key} event={card.data} />;
+
   const renderedCards = loop
-    ? Array.from({ length: LOOP_COPIES }).flatMap((_, copyIndex) =>
-        events.map((event) => <UpNextCard key={`${event.id}-${copyIndex}`} event={event} />)
-      )
-    : events.map((event) => <UpNextCard key={event.id} event={event} />);
+    ? Array.from({ length: LOOP_COPIES }).flatMap((_, copyIndex) => cards.map((card) => renderCard(card, `${cardKey(card)}-${copyIndex}`)))
+    : cards.map((card) => renderCard(card, cardKey(card)));
 
   return (
     <section className="py-24" style={{ background: "var(--card)", borderTop: "1px solid var(--border)" }}>
