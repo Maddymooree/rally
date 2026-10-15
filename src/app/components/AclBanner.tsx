@@ -6,9 +6,12 @@ const ACL_DATE = new Date("2026-10-16T00:00:00");
 // Update as applications come in.
 const ACL_APPLICANT_COUNT = 0;
 
-function weeksOutLabel() {
-  const msPerWeek = 1000 * 60 * 60 * 24 * 7;
-  const weeksOut = Math.max(1, Math.ceil((ACL_DATE.getTime() - Date.now()) / msPerWeek));
+function countdownLabel() {
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysOut = Math.ceil((ACL_DATE.getTime() - Date.now()) / msPerDay);
+  if (daysOut <= 0) return "today";
+  if (daysOut <= 7) return daysOut + (daysOut === 1 ? " day out" : " days out");
+  const weeksOut = Math.ceil(daysOut / 7);
   return weeksOut + (weeksOut === 1 ? " week out" : " weeks out");
 }
 
@@ -17,7 +20,7 @@ export function AclBanner() {
   const [label, setLabel] = useState("");
 
   useEffect(() => {
-    setLabel(weeksOutLabel());
+    setLabel(countdownLabel());
   }, []);
 
   return (
