@@ -46,16 +46,6 @@ export function Hero() {
       />
 
       <div className="hero-content absolute inset-0 flex flex-col items-center justify-center px-6 pt-24" style={{ zIndex: 10 }}>
-        <div
-          className="hero-pill flex items-center gap-2 px-4 py-2 rounded-full mb-7"
-          style={{ border: "1px solid color-mix(in srgb, var(--primary) 40%, transparent)", background: "color-mix(in srgb, var(--primary) 7%, transparent)" }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "var(--primary)" }} />
-          <span className="font-body text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--primary)" }}>
-            not a dating app
-          </span>
-        </div>
-
         <h1
           className="hero-heading font-display text-center text-white mb-6"
           style={{ fontSize: "clamp(2.6rem,7.5vw,6rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.02em", maxWidth: "720px" }}
