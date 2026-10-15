@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "rally",
+    "slug": "rally",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "rally",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#070c1a",
+    "plugins": ["expo-router"],
+    "ios": {
+      "supportsTablet": true,
+      "backgroundColor": "#070c1a"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#070c1a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    }
+  }
+}
