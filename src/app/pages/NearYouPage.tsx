@@ -244,7 +244,7 @@ export function NearYouPage() {
           you should rally
         </h1>
         <p className="font-body text-center mb-10 max-w-sm italic" style={{ color: "color-mix(in srgb, var(--foreground) 55%, transparent)" }}>
-          your city has a scene. we'll show you who's in it.
+          find your next show. we'll find your people.
         </p>
         <button
           onClick={enter}
