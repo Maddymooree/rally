@@ -125,21 +125,6 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
-    slug: "rolling loud",
-    name: "rolling loud",
-    dates: "dates tba",
-    city: "miami, fl",
-    status: null,
-    icon: ({ size = 26 }) => (
-      <svg width={size} height={size * 0.87} viewBox="0 0 30 26" fill="none" stroke={stroke} strokeWidth="2.2" strokeLinecap="round">
-        <line x1="5" y1="20" x2="5" y2="12" />
-        <line x1="12" y1="24" x2="12" y2="4" />
-        <line x1="19" y1="20" x2="19" y2="10" />
-        <line x1="26" y1="22" x2="26" y2="8" />
-      </svg>
-    ),
-  },
-  {
     slug: "lollapalooza",
     name: "lollapalooza",
     dates: "dates tba",

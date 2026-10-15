@@ -1,5 +1,5 @@
 const TICKER_ITEMS = [
-  "coachella", "·", "iii points", "·", "rolling loud", "·",
+  "coachella", "·", "iii points", "·",
   "edc las vegas", "·", "lollapalooza", "·",
   "tomorrowland", "·", "ultra", "·", "burning man", "·",
 ];
