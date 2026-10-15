@@ -4,7 +4,7 @@ import { Mascot } from "./Mascot";
 const IS = [
   "grouped by vibe, experience, and logistics",
   "group-first: you meet everyone at once",
-  "vetted applicants. real intros. actual plans.",
+  "reviewed applicants. real intros. actual plans.",
   "people headed to the same place",
 ];
 const NOT = [
