@@ -4,6 +4,33 @@ import { CrowdScene } from "../components/CrowdScene";
 import { CityWaitlist } from "../components/CityWaitlist";
 import { CITIES, getEventsForCity, getUpcomingEvents, type EventGenre, type RallyEvent } from "../lib/events";
 
+function GenrePills({ event }: { event: RallyEvent }) {
+  return (
+    <>
+      {event.genres.slice(0, 2).map((g) => (
+        <span
+          key={g}
+          className="font-body text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+          style={{ background: "color-mix(in srgb, var(--background) 55%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)" }}
+        >
+          {g}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function FeaturedBadge() {
+  return (
+    <span
+      className="font-body text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap"
+      style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
+    >
+      featured
+    </span>
+  );
+}
+
 function EventCard({ event, showCity = false }: { event: RallyEvent; showCity?: boolean }) {
   const cityName = CITIES.find((c) => c.slug === event.city)?.name;
   const params = new URLSearchParams({
@@ -11,42 +38,35 @@ function EventCard({ event, showCity = false }: { event: RallyEvent; showCity?: 
     event: `${event.artist} @ ${event.venue}`,
     dates: event.dateLabel,
   });
+  const hasImage = !!event.imageUrl;
+
   return (
     <div
       className="rounded-xl overflow-hidden flex flex-col anim-slide-up"
       style={{ background: "var(--card)", border: "1px solid var(--border)" }}
     >
-      <div
-        className="relative"
-        style={{
-          height: "140px",
-          background: event.imageUrl
-            ? `center / cover no-repeat url(${event.imageUrl})`
-            : "linear-gradient(135deg, color-mix(in srgb, var(--primary) 18%, var(--background)), var(--background))",
-        }}
-      >
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, var(--card) 0%, transparent 60%)" }} />
-        <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-          {event.genres.slice(0, 2).map((g) => (
-            <span
-              key={g}
-              className="font-body text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
-              style={{ background: "color-mix(in srgb, var(--background) 55%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)" }}
-            >
-              {g}
+      {hasImage && (
+        <div className="relative" style={{ height: "140px", background: `center / cover no-repeat url(${event.imageUrl})` }}>
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, var(--card) 0%, transparent 60%)" }} />
+          <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+            <GenrePills event={event} />
+          </div>
+          {event.featured && (
+            <span className="absolute top-3 right-3">
+              <FeaturedBadge />
             </span>
-          ))}
+          )}
         </div>
-        {event.featured && (
-          <span
-            className="absolute top-3 right-3 font-body text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
-            style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
-          >
-            featured
-          </span>
-        )}
-      </div>
+      )}
       <div className="p-5 flex flex-col flex-1">
+        {!hasImage && (
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <div className="flex gap-1.5 flex-wrap">
+              <GenrePills event={event} />
+            </div>
+            {event.featured && <FeaturedBadge />}
+          </div>
+        )}
         <h3 className="font-display font-black text-xl text-white mb-1 lowercase">{event.artist}</h3>
         <p className="font-body text-sm mb-4" style={{ color: "var(--muted-foreground)" }}>
           {event.venue}{showCity && cityName ? `, ${cityName}` : ""} · {event.dateLabel}
