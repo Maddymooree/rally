@@ -2,10 +2,9 @@
 // row to a Sheet) but as its own deployment, since the waitlist needs its
 // own sheet/dedup logic separate from festival applications. The matching
 // Apps Script source lives in google-apps-script/waitlist/ — see its
-// SETUP.md. Until that's deployed and this URL is filled in, submissions
-// will fail with a network error (surfaced in the UI as the normal
-// "something went wrong" message, not a silent failure).
-export const WAITLIST_SUBMIT_URL = "";
+// SETUP.md.
+export const WAITLIST_SUBMIT_URL =
+  "https://script.google.com/macros/s/AKfycbygVN_yhbtot8xMYR7qaoPPA30WMDcOCOCRqF_7hfuGzfVL3ADprh1uyVk57CtA44G-Fg/exec";
 
 export interface WaitlistData {
   firstName: string;
