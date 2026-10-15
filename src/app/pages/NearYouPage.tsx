@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { CrowdScene } from "../components/CrowdScene";
+import { CityWaitlist } from "../components/CityWaitlist";
 import { CITIES, getEventsForCity, getUpcomingEvents, type EventGenre, type RallyEvent } from "../lib/events";
 
 function EventCard({ event, showCity = false }: { event: RallyEvent; showCity?: boolean }) {
@@ -71,11 +72,17 @@ function DiscoveryView() {
     setGenre(null);
   };
 
-  const previewEvents = city ? [] : getUpcomingEvents(6);
+  // Only tease events from active cities here — a coming-soon city's shows
+  // (if any exist in the data) shouldn't surface a live "find your crew"
+  // button before matching has actually launched there.
+  const activeCitySlugs = CITIES.filter((c) => c.status === "active").map((c) => c.slug);
+  const previewEvents = city ? [] : getUpcomingEvents(12).filter((e) => activeCitySlugs.includes(e.city)).slice(0, 6);
   const allEvents = city ? getEventsForCity(city) : [];
   const availableGenres = Array.from(new Set(allEvents.flatMap((e) => e.genres)));
   const events = genre ? allEvents.filter((e) => e.genres.includes(genre)) : allEvents;
-  const cityName = CITIES.find((c) => c.slug === city)?.name;
+  const selectedCity = CITIES.find((c) => c.slug === city);
+  const cityName = selectedCity?.name;
+  const isActiveCity = selectedCity?.status === "active";
 
   return (
     <div className="anim-slide-up" style={{ paddingTop: "88px" }}>
@@ -87,7 +94,7 @@ function DiscoveryView() {
           your city has a scene.
         </h1>
         <p className="font-body text-sm max-w-md mx-auto" style={{ color: "var(--muted-foreground)" }}>
-          edm, house, techno — pick your city and see who's headed to the same sets you are.
+          find your next show. we'll find your people.
         </p>
       </section>
 
@@ -98,19 +105,35 @@ function DiscoveryView() {
               <button
                 key={c.slug}
                 onClick={() => selectCity(c.slug)}
-                className="font-body text-sm font-semibold px-5 py-2.5 rounded-full transition-all"
+                className="font-body text-sm font-semibold px-5 py-2.5 rounded-full transition-all inline-flex items-center gap-2"
                 style={
                   city === c.slug
                     ? { background: "var(--primary)", color: "var(--primary-foreground)" }
                     : { background: "var(--card)", color: "var(--foreground)", border: "1px solid var(--border)" }
                 }
               >
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: c.status === "active"
+                      ? (city === c.slug ? "var(--primary-foreground)" : "var(--primary)")
+                      : (city === c.slug ? "color-mix(in srgb, var(--primary-foreground) 40%, transparent)" : "color-mix(in srgb, var(--foreground) 25%, transparent)"),
+                  }}
+                />
                 {c.name}
               </button>
             ))}
           </div>
 
-          {city && availableGenres.length > 1 && (
+          {city && isActiveCity && (
+            <p className="font-body text-xs font-bold uppercase tracking-wider text-center mb-6" style={{ color: "var(--primary)" }}>
+              crews forming in {cityName}
+            </p>
+          )}
+
+          {city && isActiveCity && availableGenres.length > 1 && (
             <div className="flex flex-wrap justify-center gap-2 mb-10">
               <button
                 onClick={() => setGenre(null)}
@@ -150,7 +173,7 @@ function DiscoveryView() {
                   <div className="flex items-center justify-center gap-3 mb-8">
                     <span style={{ height: 1, width: 32, background: "var(--border)" }} />
                     <p className="font-body text-xs font-bold uppercase tracking-wider" style={{ color: "var(--primary)" }}>
-                      trending across every city
+                      trending now
                     </p>
                     <span style={{ height: 1, width: 32, background: "var(--border)" }} />
                   </div>
@@ -164,25 +187,27 @@ function DiscoveryView() {
             </>
           )}
 
-          {city && allEvents.length === 0 && (
+          {city && isActiveCity && allEvents.length === 0 && (
             <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
               nothing confirmed in {cityName} yet — check back soon.
             </p>
           )}
 
-          {city && allEvents.length > 0 && events.length === 0 && (
+          {city && isActiveCity && allEvents.length > 0 && events.length === 0 && (
             <p className="font-body text-sm text-center" style={{ color: "var(--muted-foreground)" }}>
               no {genre} shows in {cityName} right now — try a different genre.
             </p>
           )}
 
-          {city && events.length > 0 && (
+          {city && isActiveCity && events.length > 0 && (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {events.map((event) => (
                 <EventCard key={event.id} event={event} />
               ))}
             </div>
           )}
+
+          {city && !isActiveCity && selectedCity && <CityWaitlist key={city} cityName={selectedCity.name} />}
         </div>
       </section>
     </div>

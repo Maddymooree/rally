@@ -32,17 +32,27 @@ export interface RallyEvent {
   sourceId?: string;
 }
 
+// "active" cities show live events + the full crew-matching flow on
+// /near-you. "coming-soon" cities show a branded waitlist instead — their
+// event data (if any) stays in events-data.json untouched, just not
+// rendered, so flipping a city to "active" later needs no data changes.
+export type CityStatus = "active" | "coming-soon";
+
 export interface City {
   slug: string;
   name: string;
+  status: CityStatus;
 }
 
+// To launch a new city or activate one already listed: add/edit its entry
+// here. Nothing else in the site needs to change — the near-you page, the
+// apply dropdown, and event filtering all key off this array.
 export const CITIES: City[] = [
-  { slug: "dallas", name: "dallas" },
-  { slug: "new-york", name: "new york" },
-  { slug: "los-angeles", name: "los angeles" },
-  { slug: "miami", name: "miami" },
-  { slug: "chicago", name: "chicago" },
+  { slug: "miami", name: "miami", status: "active" },
+  { slug: "dallas", name: "dallas", status: "coming-soon" },
+  { slug: "new-york", name: "new york", status: "coming-soon" },
+  { slug: "los-angeles", name: "los angeles", status: "coming-soon" },
+  { slug: "chicago", name: "chicago", status: "coming-soon" },
 ];
 
 const EVENTS = eventsData as RallyEvent[];
