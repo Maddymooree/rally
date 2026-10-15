@@ -57,8 +57,9 @@ export const FESTIVALS: Festival[] = [
     icon: ({ size = 26 }) => (
       <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
         <circle cx="14" cy="16" r="8" />
-        <path d="M7.1 12 H20.9 M6 16 H22 M7.1 20 H20.9" />
-        <path d="M10 9.1 V22.9 M14 8 V24 M18 9.1 V22.9" />
+        <ellipse cx="14" cy="16" rx="3" ry="8" />
+        <ellipse cx="14" cy="16" rx="6" ry="8" />
+        <ellipse cx="14" cy="16" rx="8" ry="2.5" />
         <path d="M14 8 V3" />
         <circle cx="14" cy="2" r="1" fill={stroke} stroke="none" />
       </svg>
