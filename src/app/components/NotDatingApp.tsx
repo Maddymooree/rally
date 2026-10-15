@@ -8,7 +8,7 @@ const IS = [
   "people headed to the same place",
 ];
 const NOT = [
-  "a dating app",
+  "to find a date",
   "a random group chat you never show up to",
   "awkward one-on-one matching",
   "waiting for your friends to commit",
