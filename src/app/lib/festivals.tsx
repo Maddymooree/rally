@@ -47,6 +47,20 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
+    slug: "circoloco miami",
+    name: "circoloco miami",
+    dates: "dec 5, 2026",
+    startDate: "2026-12-05",
+    endDate: "2026-12-05",
+    city: "miami, fl",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.8">
+        <circle cx="14" cy="14" r="10" />
+      </svg>
+    ),
+  },
+  {
     slug: "coachella",
     name: "coachella",
     dates: "apr 9–11 & 16–18, 2027",
