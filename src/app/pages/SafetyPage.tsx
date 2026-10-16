@@ -4,7 +4,7 @@ import { Shield, UserCheck, Users, Flag } from "lucide-react";
 const ITEMS = [
   {
     icon: Shield,
-    title: "vetted, not open signup",
+    title: "reviewed, not open signup",
     body: "every application is reviewed by a real person — name, age, instagram, and trip details are all reviewed before you're approved.",
   },
   {
