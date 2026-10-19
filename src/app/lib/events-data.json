@@ -1018,35 +1018,5 @@
     "status": "approved",
     "source": "manual",
     "sourceId": "sonny-fodera-liv-miami-2026-12-12"
-  },
-  {
-    "id": "takuya-nakamura-zeyzey-miami-2026-12-12",
-    "artist": "takuya nakamura",
-    "venue": "zeyzey miami",
-    "city": "miami",
-    "date": "2026-12-12",
-    "dateLabel": "dec 12, 2026",
-    "genres": [],
-    "imageUrl": null,
-    "ticketUrl": null,
-    "featured": false,
-    "status": "approved",
-    "source": "manual",
-    "sourceId": "takuya-nakamura-zeyzey-miami-2026-12-12"
-  },
-  {
-    "id": "eelke-kleijn-upside-miami-2026-12-13",
-    "artist": "eelke kleijn",
-    "venue": "upside",
-    "city": "miami",
-    "date": "2026-12-13",
-    "dateLabel": "dec 13, 2026",
-    "genres": [],
-    "imageUrl": null,
-    "ticketUrl": null,
-    "featured": false,
-    "status": "approved",
-    "source": "manual",
-    "sourceId": "eelke-kleijn-upside-miami-2026-12-13"
   }
 ]
