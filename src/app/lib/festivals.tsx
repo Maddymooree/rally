@@ -50,61 +50,17 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
-    slug: "coachella",
-    name: "coachella",
-    dates: "apr 9–11 & 16–18, 2027",
-    startDate: "2027-04-09",
-    endDate: "2027-04-18",
-    city: "indio, ca",
-    status: null,
-    icon: ({ size = 26 }) => (
-      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6">
-        <circle cx="14" cy="14" r="4" />
-        <path d="M14 2v6M14 20v6M2 14h6M20 14h6M5.5 5.5l4.2 4.2M18.3 18.3l4.2 4.2M22.5 5.5l-4.2 4.2M9.7 18.3l-4.2 4.2" />
-      </svg>
-    ),
-  },
-  {
-    slug: "edc las vegas",
-    name: "edc las vegas",
-    dates: "may 14–16 & 21–23, 2027",
-    startDate: "2027-05-14",
-    endDate: "2027-05-23",
-    city: "las vegas, nv",
-    status: null,
-    icon: ({ size = 26 }) => (
-      <svg width={size * 0.86} height={size} viewBox="0 0 24 28" fill="none" stroke={stroke} strokeWidth="1.8">
-        <path d="M13 1 L4 16 h6 l-3 11 12-17 h-6 Z" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    slug: "forbidden kingdom",
-    name: "forbidden kingdom",
-    dates: "apr 23–25, 2027",
-    startDate: "2027-04-23",
-    endDate: "2027-04-25",
+    slug: "wasteland orlando",
+    name: "wasteland orlando",
+    dates: "feb 5–6, 2027",
+    startDate: "2027-02-05",
+    endDate: "2027-02-06",
     city: "orlando, fl",
     status: null,
     icon: ({ size = 26 }) => (
-      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinejoin="round">
-        <path d="M5 26V14h3v-3h2V8h2v3h4V8h2v3h2v3h3v12H5Z" />
-        <path d="M10 26v-7h8v7" />
-      </svg>
-    ),
-  },
-  {
-    slug: "tomorrowland",
-    name: "tomorrowland",
-    sub: "weekend 1",
-    dates: "jul 17–19, 2027",
-    startDate: "2027-07-17",
-    endDate: "2027-07-19",
-    city: "boom, belgium",
-    status: null,
-    icon: ({ size = 26 }) => (
-      <svg width={size} height={size} viewBox="0 0 26 26" fill="none" stroke={stroke} strokeWidth="1.6">
-        <path d="M18 4a9 9 0 1 0 6 15.9A11 11 0 0 1 18 4Z" strokeLinejoin="round" />
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
+        <circle cx="14" cy="10" r="5" />
+        <path d="M2 24c3-5 7-5 10 0s7 5 10 0" />
       </svg>
     ),
   },
@@ -124,14 +80,61 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
-    slug: "lollapalooza",
-    name: "lollapalooza",
-    dates: "dates tba",
-    city: "chicago, il",
+    slug: "coachella",
+    name: "coachella",
+    dates: "apr 9–11 & 16–18, 2027",
+    startDate: "2027-04-09",
+    endDate: "2027-04-18",
+    city: "indio, ca",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6">
+        <circle cx="14" cy="14" r="4" />
+        <path d="M14 2v6M14 20v6M2 14h6M20 14h6M5.5 5.5l4.2 4.2M18.3 18.3l4.2 4.2M22.5 5.5l-4.2 4.2M9.7 18.3l-4.2 4.2" />
+      </svg>
+    ),
+  },
+  {
+    slug: "forbidden kingdom",
+    name: "forbidden kingdom",
+    dates: "apr 23–25, 2027",
+    startDate: "2027-04-23",
+    endDate: "2027-04-25",
+    city: "orlando, fl",
     status: null,
     icon: ({ size = 26 }) => (
       <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinejoin="round">
-        <path d="M14 2 L17 10.5 L26 10.5 L18.8 16 L21.5 25 L14 19.5 L6.5 25 L9.2 16 L2 10.5 L11 10.5 Z" />
+        <path d="M5 26V14h3v-3h2V8h2v3h4V8h2v3h2v3h3v12H5Z" />
+        <path d="M10 26v-7h8v7" />
+      </svg>
+    ),
+  },
+  {
+    slug: "edc las vegas",
+    name: "edc las vegas",
+    dates: "may 14–16 & 21–23, 2027",
+    startDate: "2027-05-14",
+    endDate: "2027-05-23",
+    city: "las vegas, nv",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size * 0.86} height={size} viewBox="0 0 24 28" fill="none" stroke={stroke} strokeWidth="1.8">
+        <path d="M13 1 L4 16 h6 l-3 11 12-17 h-6 Z" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    slug: "tomorrowland",
+    name: "tomorrowland",
+    sub: "weekend 1",
+    dates: "jul 17–19, 2027",
+    startDate: "2027-07-17",
+    endDate: "2027-07-19",
+    city: "boom, belgium",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size} viewBox="0 0 26 26" fill="none" stroke={stroke} strokeWidth="1.6">
+        <path d="M18 4a9 9 0 1 0 6 15.9A11 11 0 0 1 18 4Z" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -151,17 +154,14 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
-    slug: "wasteland orlando",
-    name: "wasteland orlando",
-    dates: "feb 5–6, 2027",
-    startDate: "2027-02-05",
-    endDate: "2027-02-06",
-    city: "orlando, fl",
+    slug: "lollapalooza",
+    name: "lollapalooza",
+    dates: "dates tba",
+    city: "chicago, il",
     status: null,
     icon: ({ size = 26 }) => (
-      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
-        <circle cx="14" cy="10" r="5" />
-        <path d="M2 24c3-5 7-5 10 0s7 5 10 0" />
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinejoin="round">
+        <path d="M14 2 L17 10.5 L26 10.5 L18.8 16 L21.5 25 L14 19.5 L6.5 25 L9.2 16 L2 10.5 L11 10.5 Z" />
       </svg>
     ),
   },
