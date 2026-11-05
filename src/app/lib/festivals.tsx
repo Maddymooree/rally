@@ -37,7 +37,7 @@ export const FESTIVALS: Festival[] = [
     startDate: "2026-12-05",
     endDate: "2026-12-05",
     city: "miami, fl",
-    status: null,
+    status: "open",
     icon: ({ size = 26 }) => (
       <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
         <circle cx="14" cy="16" r="8" />
