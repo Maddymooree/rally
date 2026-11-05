@@ -136,10 +136,27 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
-    slug: "wasteland festival",
-    name: "wasteland festival",
-    dates: "dates tba",
+    slug: "wasteland socal",
+    name: "wasteland socal",
+    dates: "sep 3–4, 2027",
+    startDate: "2027-09-03",
+    endDate: "2027-09-04",
     city: "san bernardino, ca",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
+        <circle cx="14" cy="10" r="5" />
+        <path d="M2 24c3-5 7-5 10 0s7 5 10 0" />
+      </svg>
+    ),
+  },
+  {
+    slug: "wasteland orlando",
+    name: "wasteland orlando",
+    dates: "feb 5–6, 2027",
+    startDate: "2027-02-05",
+    endDate: "2027-02-06",
+    city: "orlando, fl",
     status: null,
     icon: ({ size = 26 }) => (
       <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
