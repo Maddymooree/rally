@@ -79,6 +79,21 @@ export const FESTIVALS: Festival[] = [
     ),
   },
   {
+    slug: "forbidden kingdom",
+    name: "forbidden kingdom",
+    dates: "apr 23–25, 2027",
+    startDate: "2027-04-23",
+    endDate: "2027-04-25",
+    city: "orlando, fl",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinejoin="round">
+        <path d="M5 26V14h3v-3h2V8h2v3h4V8h2v3h2v3h3v12H5Z" />
+        <path d="M10 26v-7h8v7" />
+      </svg>
+    ),
+  },
+  {
     slug: "tomorrowland",
     name: "tomorrowland",
     sub: "weekend 1",
@@ -117,6 +132,19 @@ export const FESTIVALS: Festival[] = [
     icon: ({ size = 26 }) => (
       <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinejoin="round">
         <path d="M14 2 L17 10.5 L26 10.5 L18.8 16 L21.5 25 L14 19.5 L6.5 25 L9.2 16 L2 10.5 L11 10.5 Z" />
+      </svg>
+    ),
+  },
+  {
+    slug: "wasteland festival",
+    name: "wasteland festival",
+    dates: "dates tba",
+    city: "san bernardino, ca",
+    status: null,
+    icon: ({ size = 26 }) => (
+      <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round">
+        <circle cx="14" cy="10" r="5" />
+        <path d="M2 24c3-5 7-5 10 0s7 5 10 0" />
       </svg>
     ),
   },
